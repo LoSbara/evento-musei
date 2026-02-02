@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Il Mistero Svelato - Agatha Christie</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital@0;1&family=Playfair+Display:wght@700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Crimson Text', serif;
+            color: #e8dcc4;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        .book-container {
+            width: 100%;
+            max-width: 900px;
+            height: 600px;
+            perspective: 1200px;
+            position: relative;
+        }
+
+        .book {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            background: linear-gradient(to right, #3d3d3d 0%, #2d2d2d 50%, #3d3d3d 100%);
+            border-radius: 5px;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.8),
+                inset 0 0 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .pages-wrapper {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            position: relative;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .page {
+            flex: 1;
+            background: linear-gradient(135deg, #f5f1e8 0%, #e8dcc4 100%);
+            padding: 60px 50px;
+            overflow-y: auto;
+            position: relative;
+            border-right: 1px solid #d4c5b0;
+            box-shadow: inset -5px 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .page:last-child {
+            border-right: none;
+        }
+
+        .page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0, 0, 0, 0.03) 2px,
+                    rgba(0, 0, 0, 0.03) 4px
+                );
+            pointer-events: none;
+        }
+
+        .page-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: 30px;
+            right: 40px;
+            font-size: 1.2em;
+            color: #8b7355;
+            font-style: italic;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3em;
+            color: #2d1810;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2em;
+            color: #8b4513;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #d4af37;
+            padding-bottom: 15px;
+        }
+
+        p {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #3d3d3d;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .decorator {
+            text-align: center;
+            color: #d4af37;
+            font-size: 2em;
+            margin: 40px 0;
+        }
+
+        .locked-page {
+            background: linear-gradient(135deg, #4a4a4a 0%, #3d3d3d 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .lock-icon {
+            font-size: 8em;
+            color: #d4af37;
+            margin-bottom: 20px;
+            animation: wobble 3s infinite;
+        }
+
+        @keyframes wobble {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+        }
+
+        .locked-page h2 {
+            color: #d4af37;
+            border-bottom: 3px solid #d4af37;
+        }
+
+        .locked-page p {
+            color: #e8dcc4;
+            font-size: 1.3em;
+            max-width: 70%;
+        }
+
+        .qr-link {
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(212, 175, 55, 0.1);
+            border: 2px solid #d4af37;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #d4af37;
+            font-size: 1.2em;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        .qr-link:hover {
+            background: rgba(212, 175, 55, 0.2);
+            transform: scale(1.05);
+        }
+
+        .controls {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 10;
+        }
+
+        button {
+            padding: 12px 30px;
+            background: #d4af37;
+            color: #2d1810;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            font-weight: bold;
+            font-family: 'Crimson Text', serif;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        button:hover {
+            background: #e8c547;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .page-indicator {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3em;
+            color: #8b7355;
+        }
+
+        .page.page-1 {
+            background: linear-gradient(135deg, #d4af37 0%, #e8dcc4 100%);
+        }
+
+        @media (max-width: 768px) {
+            .book-container {
+                height: auto;
+                aspect-ratio: 1;
+            }
+
+            .page {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            p {
+                font-size: 0.95em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="book-container">
+        <div class="book">
+            <div class="pages-wrapper" id="pagesWrapper">
+                <!-- Pagina 1: Titolo -->
+                <div class="page page-1">
+                    <div class="page-content">
+                        <div style="height: 150px;"></div>
+                        <h1 style="text-align: center; color: #2d1810;">Il Mistero Svelato</h1>
+                        <div class="decorator">🔍</div>
+                        <p style="text-align: center; color: #8b4513; font-size: 1.3em; font-style: italic;">
+                            Un viaggio attraverso gli indizi nascosti
+                        </p>
+                        <div style="height: 150px;"></div>
+                    </div>
+                    <div class="page-number">1</div>
+                </div>
+
+                <!-- Pagina 2: BLOCCATA -->
+                <div class="page locked-page">
+                    <div class="page-content">
+                        <div class="lock-icon">🔐</div>
+                        <h2>Capitolo I</h2>
+                        <p>Questa pagina è bloccata.</p>
+                        <p style="font-size: 1em; margin-top: 20px;">Inquadra il QR code per ottenere il codice di sblocco</p>
+                        <a href="#" class="qr-link" onclick="openUnlock('page2')">Accedi al QR Code</a>
+                    </div>
+                    <div class="page-number">2</div>
+                </div>
+
+                <!-- Pagina 3: Contenuto -->
+                <div class="page">
+                    <div class="page-content">
+                        <h2>Il Primo Indizio</h2>
+                        <p>La storia ha inizio in una fredda notte d'inverno, quando il detective riceve una misteriosa lettera anonima. L'inchiostro blu scuro su carta pergamena rivela solo poche parole: "La verità si cela dove meno te l'aspetti".</p>
+                        <p>Ma cosa significa davvero? Il nostro eroe inizia il suo viaggio alla ricerca di risposte, seguendo tracce quasi invisibili che lo porteranno in angoli dimenticati della città.</p>
+                        <div class="decorator">⚜️</div>
+                        <p>Ogni dettaglio conta, ogni parola ha un significato nascosto. Come in un intricato gioco di scacchi, i pezzi iniziano lentamente a muoversi verso la loro destinazione finale.</p>
+                    </div>
+                    <div class="page-number">3</div>
+                </div>
+
+                <!-- Pagina 4: BLOCCATA -->
+                <div class="page locked-page">
+                    <div class="page-content">
+                        <div class="lock-icon">🔐</div>
+                        <h2>Capitolo II</h2>
+                        <p>Questa pagina è bloccata.</p>
+                        <p style="font-size: 1em; margin-top: 20px;">Inquadra il QR code per ottenere il codice di sblocco</p>
+                        <a href="#" class="qr-link" onclick="openUnlock('page4')">Accedi al QR Code</a>
+                    </div>
+                    <div class="page-number">4</div>
+                </div>
+
+                <!-- Pagina 5: Contenuto -->
+                <div class="page">
+                    <div class="page-content">
+                        <h2>La Trama si Infittisce</h2>
+                        <p>Mentre il detective prosegue la sua ricerca, scopre che non è solo. Altre figure ombrose si aggirano nei corridoi della verità, ognuna con i propri segreti e le proprie motivazioni.</p>
+                        <p>Le prove si accumulano, ma ogni risposta genera nuove domande. Chi può fidarsi? Chi nasconde la verità?</p>
+                        <div class="decorator">💀</div>
+                        <p>La vendetta, il tradimento, l'amore non corrisposto: tutti motivi per commettere crimini efferati. Il detective sa che la soluzione è lì, a pochi passi, ma prima deve capire quali fili tirare.</p>
+                    </div>
+                    <div class="page-number">5</div>
+                </div>
+
+                <!-- Pagina 6: BLOCCATA -->
+                <div class="page locked-page">
+                    <div class="page-content">
+                        <div class="lock-icon">🔐</div>
+                        <h2>Il Capitolo Finale</h2>
+                        <p>Questa pagina è bloccata.</p>
+                        <p style="font-size: 1em; margin-top: 20px;">Inquadra il QR code per ottenere il codice di sblocco</p>
+                        <a href="#" class="qr-link" onclick="openUnlock('page6')">Accedi al QR Code</a>
+                    </div>
+                    <div class="page-number">6</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controlli di navigazione -->
+        <div class="controls">
+            <button onclick="previousPage()" id="prevBtn">← Indietro</button>
+            <button onclick="nextPage()" id="nextBtn">Avanti →</button>
+        </div>
+    </div>
+
+    <script>
+        let currentPage = 0;
+        const pages = document.querySelectorAll('.page');
+        const totalPages = pages.length;
+
+        function showPage(index) {
+            // Clamp index tra 0 e totalPages - 1
+            if (index < 0) index = 0;
+            if (index >= totalPages) index = totalPages - 1;
+
+            currentPage = index;
+
+            // Calcola lo scorrimento orizzontale
+            const offset = -index * 100;
+            document.getElementById('pagesWrapper').style.transform = `translateX(${offset}%)`;
+
+            // Aggiorna i bottoni
+            document.getElementById('prevBtn').disabled = index === 0;
+            document.getElementById('nextBtn').disabled = index === totalPages - 1;
+        }
+
+        function nextPage() {
+            showPage(currentPage + 1);
+        }
+
+        function previousPage() {
+            showPage(currentPage - 1);
+        }
+
+        function openUnlock(pageId) {
+            event.preventDefault();
+            // Estrai il numero della pagina dal pageId (es: "page2" -> 2)
+            const pageNum = pageId.replace('page', '');
+            // Apri la pagina di sblocco con il numero della pagina
+            window.location.href = `unlock.html?page=${pageNum}`;
+        }
+
+        // Controlla al caricamento quali pagine sbloccate
+        function updateLockedPages() {
+            for (let i = 2; i <= 6; i += 2) {
+                const isUnlocked = localStorage.getItem(`page${i}_unlocked`) === 'true';
+                const pageElement = pages[i - 1]; // Indice 0-based
+                
+                if (isUnlocked) {
+                    pageElement.classList.remove('locked-page');
+                    // Qui dovrai aggiungere il contenuto effettivo della pagina
+                    // Per ora lascio il placeholder
+                }
+            }
+        }
+
+        // Inizializza
+        showPage(0);
+        updateLockedPages();
+
+        // Consenti la navigazione con i tasti
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') previousPage();
+            if (e.key === 'ArrowRight') nextPage();
+        });
+    </script>
+</body>
+</html>

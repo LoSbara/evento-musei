@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sblocca il Mistero</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital@0;1&family=Playfair+Display:wght@700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Crimson Text', serif;
+            color: #e8dcc4;
+            padding: 20px;
+        }
+
+        .unlock-container {
+            background: linear-gradient(135deg, #f5f1e8 0%, #e8dcc4 100%);
+            padding: 60px 50px;
+            border-radius: 5px;
+            max-width: 500px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+            text-align: center;
+        }
+
+        .lock-icon {
+            font-size: 5em;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5em;
+            color: #2d1810;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.1em;
+            color: #3d3d3d;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .code-input-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .code-input {
+            width: 70px;
+            height: 70px;
+            font-size: 2.5em;
+            text-align: center;
+            border: 3px solid #8b4513;
+            border-radius: 5px;
+            font-weight: bold;
+            font-family: 'Crimson Text', serif;
+            background: white;
+            color: #2d1810;
+            transition: all 0.3s ease;
+        }
+
+        .code-input:focus {
+            outline: none;
+            border-color: #d4af37;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+            transform: scale(1.1);
+        }
+
+        .code-input::placeholder {
+            color: #ccc;
+        }
+
+        button {
+            padding: 15px 50px;
+            background: linear-gradient(135deg, #d4af37 0%, #c9a227 100%);
+            color: #2d1810;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            font-weight: bold;
+            font-family: 'Crimson Text', serif;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #e8c547 0%, #d4af37 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 1.1em;
+            min-height: 30px;
+        }
+
+        .error {
+            color: #c41e3a;
+        }
+
+        .success {
+            color: #2d5016;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 30px;
+            color: #8b4513;
+            text-decoration: none;
+            font-style: italic;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #d4af37;
+        }
+
+        .decorator {
+            font-size: 2em;
+            color: #d4af37;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="unlock-container">
+        <div class="lock-icon">🔐</div>
+        <h1>Sblocca il Mistero</h1>
+        <p>Inserisci il codice a 3 cifre che hai trovato nel museo</p>
+        <div class="decorator">⚜️</div>
+
+        <div class="code-input-container">
+            <input type="number" class="code-input" id="digit1" placeholder="?" min="1" max="9" maxlength="1">
+            <input type="number" class="code-input" id="digit2" placeholder="?" min="1" max="9" maxlength="1">
+            <input type="number" class="code-input" id="digit3" placeholder="?" min="1" max="9" maxlength="1">
+        </div>
+
+        <button onclick="checkCode()">Verifica Codice</button>
+        <div class="message" id="message"></div>
+
+        <a href="index.html" class="back-link">← Torna al libro</a>
+    </div>
+
+    <script>
+        // CODICI PER SBLOCCARE LE PAGINE (cambia questi numeri!)
+        const correctCodes = {
+            '2': '111',  // Codice per pagina 2
+            '4': '222',  // Codice per pagina 4
+            '6': '333'   // Codice per pagina 6
+        };
+
+        // Ottieni il numero della pagina dall'URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const pageNum = urlParams.get('page');
+
+        const digit1 = document.getElementById('digit1');
+        const digit2 = document.getElementById('digit2');
+        const digit3 = document.getElementById('digit3');
+
+        // Auto-focus tra i campi
+        digit1.addEventListener('input', () => {
+            if (digit1.value) digit2.focus();
+        });
+
+        digit2.addEventListener('input', () => {
+            if (digit2.value) digit3.focus();
+        });
+
+        digit3.addEventListener('input', () => {
+            if (digit3.value) checkCode();
+        });
+
+        function checkCode() {
+            const inputCode = digit1.value + digit2.value + digit3.value;
+            const messageEl = document.getElementById('message');
+
+            if (inputCode.length !== 3) {
+                messageEl.textContent = '❌ Inserisci tutti i 3 numeri!';
+                messageEl.className = 'message error';
+                return;
+            }
+
+            if (inputCode === correctCodes[pageNum]) {
+                // Salva lo stato nel localStorage
+                localStorage.setItem(`page${pageNum}_unlocked`, 'true');
+
+                messageEl.textContent = '✅ Codice corretto! Pagina sbloccata!';
+                messageEl.className = 'message success';
+
+                // Reindirizza al libro dopo 1.5 secondi
+                setTimeout(() => {
+                    window.location.href = `index.html`;
+                }, 1500);
+            } else {
+                messageEl.textContent = '❌ Codice errato. Riprova!';
+                messageEl.className = 'message error';
+
+                // Pulisci gli input
+                digit1.value = '';
+                digit2.value = '';
+                digit3.value = '';
+                digit1.focus();
+            }
+        }
+
+        // Permetti l'invio anche con Enter
+        document.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') checkCode();
+        });
+    </script>
+</body>
+</html>
