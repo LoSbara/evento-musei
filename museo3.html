@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Museo 3 - Verifica Codice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+
+        .emoji {
+            font-size: 4em;
+            margin: 20px 0;
+        }
+
+        p {
+            color: #666;
+            font-size: 1.1em;
+            margin-bottom: 30px;
+        }
+
+        .code-input-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .code-input {
+            width: 70px;
+            height: 70px;
+            font-size: 2.5em;
+            text-align: center;
+            border: 3px solid #00f2fe;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .code-input:focus {
+            outline: none;
+            border-color: #4facfe;
+            transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(79, 172, 254, 0.5);
+        }
+
+        .code-input::placeholder {
+            color: #ccc;
+        }
+
+        .button-container {
+            margin-top: 30px;
+        }
+
+        button {
+            padding: 15px 40px;
+            font-size: 1.1em;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(79, 172, 254, 0.4);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 1.1em;
+            min-height: 30px;
+        }
+
+        .error {
+            color: #f44336;
+        }
+
+        .success {
+            color: #4CAF50;
+            animation: pulse 0.5s ease;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .instructions {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            color: #666;
+            font-size: 0.95em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="emoji">🗿</div>
+        <h1>Museo 3</h1>
+        <p>Inserisci il codice a 3 cifre per sbloccare questa sezione</p>
+        
+        <div class="instructions">
+            <strong>Cerchi una targa, una scritta o un indizio all'interno del museo!</strong>
+        </div>
+
+        <div class="code-input-container">
+            <input type="number" class="code-input" id="digit1" placeholder="?" min="1" max="9" maxlength="1">
+            <input type="number" class="code-input" id="digit2" placeholder="?" min="1" max="9" maxlength="1">
+            <input type="number" class="code-input" id="digit3" placeholder="?" min="1" max="9" maxlength="1">
+        </div>
+
+        <div class="button-container">
+            <button onclick="checkCode()">Verifica Codice</button>
+        </div>
+
+        <div class="message" id="message"></div>
+    </div>
+
+    <script>
+        // CAMBIA QUESTO CODICE CON QUELLO CHE VUOI (3 numeri da 1 a 9)
+        const correctCode = "333";
+
+        const digit1 = document.getElementById('digit1');
+        const digit2 = document.getElementById('digit2');
+        const digit3 = document.getElementById('digit3');
+
+        digit1.addEventListener('input', () => {
+            if (digit1.value) digit2.focus();
+        });
+
+        digit2.addEventListener('input', () => {
+            if (digit2.value) digit3.focus();
+        });
+
+        digit3.addEventListener('input', () => {
+            if (digit3.value) checkCode();
+        });
+
+        function checkCode() {
+            const inputCode = digit1.value + digit2.value + digit3.value;
+            const messageEl = document.getElementById('message');
+
+            if (inputCode.length !== 3) {
+                messageEl.textContent = 'Inserisci tutti i 3 numeri!';
+                messageEl.className = 'message error';
+                return;
+            }
+
+            if (inputCode === correctCode) {
+                localStorage.setItem('museo3_unlocked', 'true');
+                
+                messageEl.textContent = '✅ Codice corretto! Sezione sbloccata!';
+                messageEl.className = 'message success';
+                
+                setTimeout(() => {
+                    window.location.href = 'finale.html';
+                }, 1500);
+            } else {
+                messageEl.textContent = '❌ Codice errato. Riprova!';
+                messageEl.className = 'message error';
+                
+                digit1.value = '';
+                digit2.value = '';
+                digit3.value = '';
+                digit1.focus();
+            }
+        }
+
+        document.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') checkCode();
+        });
+    </script>
+</body>
+</html>
