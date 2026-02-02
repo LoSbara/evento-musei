@@ -21,13 +21,13 @@ Sostituisci con il codice a 3 numeri (da 1 a 9) che vuoi usare.
 ### Esempio:
 ```javascript
 // Museo 1
-const correctCode = "523"; // Codice per il Museo 1
+const correctCode = "111"; // Codice per il Museo 1
 
 // Museo 2
-const correctCode = "847"; // Codice per il Museo 2
+const correctCode = "222"; // Codice per il Museo 2
 
 // Museo 3
-const correctCode = "691"; // Codice per il Museo 3
+const correctCode = "333"; // Codice per il Museo 3
 ```
 
 ## Come funziona:

@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Il Mistero Svelato - Agatha Christie</title>
+    <title>Il Mistero Svelato</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital@0;1&family=Playfair+Display:wght@700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital@0;1&family=Playfair+Display:wght@700;900&display=swap');
 
         * {
             margin: 0;
@@ -13,58 +13,80 @@
             box-sizing: border-box;
         }
 
-        body {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: 'Crimson Text', serif;
-            color: #e8dcc4;
-            padding: 20px;
+        html, body {
+            width: 100%;
+            height: 100%;
             overflow: hidden;
+        }
+
+        body {
+            background: #2a2a1f url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect fill="%232a2a1f" width="100" height="100"/><circle cx="10" cy="10" r="1" fill="%23000" opacity="0.05"/><circle cx="30" cy="40" r="1" fill="%23000" opacity="0.03"/><circle cx="70" cy="20" r="1" fill="%23000" opacity="0.04"/></svg>');
+            font-family: 'Crimson Text', serif;
+            color: #3d3d3d;
         }
 
         .book-container {
-            width: 100%;
-            max-width: 900px;
-            height: 600px;
-            perspective: 1200px;
-            position: relative;
-        }
-
-        .book {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            background: linear-gradient(to right, #3d3d3d 0%, #2d2d2d 50%, #3d3d3d 100%);
-            border-radius: 5px;
-            box-shadow: 
-                0 20px 60px rgba(0, 0, 0, 0.8),
-                inset 0 0 50px rgba(0, 0, 0, 0.5);
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            background: #2a2a1f;
         }
 
         .pages-wrapper {
-            width: 100%;
-            height: 100%;
+            flex: 1;
             display: flex;
-            position: relative;
-            border-radius: 5px;
             overflow: hidden;
+            transition: transform 1s ease;
+            width: 600vw;
+            flex-wrap: nowrap;
+            position: relative;
+        }
+
+        .pages-wrapper::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 0%, #8b4513 10%, #8b4513 90%, transparent 100%);
+            z-index: 50;
+            transform: translateX(-50%);
+            box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.4);
         }
 
         .page {
-            flex: 1;
-            background: linear-gradient(135deg, #f5f1e8 0%, #e8dcc4 100%);
-            padding: 60px 50px;
+            flex: 0 0 50vw;
+            width: 50vw;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(139, 69, 19, 0.02) 2px,
+                    rgba(139, 69, 19, 0.02) 4px
+                ),
+                linear-gradient(180deg, #f5f1e8 0%, #e8dcc4 50%, #ddd0c1 100%);
+            padding: 60px 80px;
             overflow-y: auto;
+            color: #3d3d3d;
             position: relative;
-            border-right: 1px solid #d4c5b0;
-            box-shadow: inset -5px 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 
+                inset -15px 0 30px rgba(0, 0, 0, 0.15), 
+                inset 0 0 40px rgba(0, 0, 0, 0.05),
+                15px 0 30px rgba(0, 0, 0, 0.3);
+            border-right: 1px solid rgba(139, 69, 19, 0.1);
         }
 
-        .page:last-child {
-            border-right: none;
+        .page:nth-child(odd) {
+            border-right: 1px solid rgba(139, 69, 19, 0.1);
+        }
+
+        .page:nth-child(even) {
+            border-left: 1px solid rgba(139, 69, 19, 0.1);
         }
 
         .page::before {
@@ -74,149 +96,249 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-image: 
+            background: repeating-linear-gradient(
+                0deg,
+                transparent 0px,
+                transparent 2px,
+                rgba(0, 0, 0, 0.01) 2px,
+                rgba(0, 0, 0, 0.01) 4px
+            );
+            pointer-events: none;
+        }
+
+        .page::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60px;
+            height: 100%;
+            background: linear-gradient(to left, rgba(0, 0, 0, 0.08), transparent);
+            pointer-events: none;
+        }
+
+        .page.page-1 {
+            background: 
                 repeating-linear-gradient(
                     90deg,
                     transparent,
                     transparent 2px,
-                    rgba(0, 0, 0, 0.03) 2px,
-                    rgba(0, 0, 0, 0.03) 4px
-                );
-            pointer-events: none;
-        }
-
-        .page-content {
-            position: relative;
-            z-index: 2;
+                    rgba(139, 69, 19, 0.02) 2px,
+                    rgba(139, 69, 19, 0.02) 4px
+                ),
+                linear-gradient(135deg, #d4af37 0%, #c9a227 50%, #e8dcc4 100%);
         }
 
         .page-number {
             position: absolute;
             bottom: 30px;
             right: 40px;
-            font-size: 1.2em;
             color: #8b7355;
-            font-style: italic;
+            font-size: 1.1em;
+            font-family: 'Playfair Display', serif;
+            opacity: 0.6;
         }
 
         h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 3em;
+            font-size: 3.2em;
+            font-weight: 900;
             color: #2d1810;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            text-align: center;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        h1::before,
+        h1::after {
+            content: '✦';
+            display: block;
+            font-size: 0.6em;
+            letter-spacing: 10px;
+            color: #8b4513;
+            margin: 15px 0;
         }
 
         h2 {
             font-family: 'Playfair Display', serif;
             font-size: 2.2em;
-            color: #8b4513;
-            margin-bottom: 30px;
-            border-bottom: 3px solid #d4af37;
+            font-weight: 700;
+            color: #6b3410;
+            margin-bottom: 25px;
             padding-bottom: 15px;
+            border-bottom: 2px solid #8b4513;
+            letter-spacing: 1px;
+        }
+
+        h2::before {
+            content: '❦ ';
+            color: #8b4513;
+            font-size: 1.1em;
         }
 
         p {
             font-size: 1.1em;
-            line-height: 1.8;
-            color: #3d3d3d;
-            margin-bottom: 20px;
+            line-height: 1.9;
+            margin-bottom: 18px;
             text-align: justify;
+            color: #4a4a4a;
         }
 
         .decorator {
             text-align: center;
-            color: #d4af37;
-            font-size: 2em;
-            margin: 40px 0;
+            font-size: 1.5em;
+            color: #8b4513;
+            margin: 35px 0;
+            opacity: 0.7;
+            letter-spacing: 8px;
         }
 
         .locked-page {
-            background: linear-gradient(135deg, #4a4a4a 0%, #3d3d3d 100%);
+            display: flex !important;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: 
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0, 0, 0, 0.03) 2px,
+                    rgba(0, 0, 0, 0.03) 4px
+                ),
+                linear-gradient(135deg, #5a4a3a 0%, #4a3a2a 100%) !important;
+            color: #e8dcc4;
+            box-shadow: 
+                inset -15px 0 30px rgba(0, 0, 0, 0.3),
+                inset 0 0 40px rgba(0, 0, 0, 0.2),
+                15px 0 30px rgba(0, 0, 0, 0.4) !important;
+            padding: 60px 80px !important;
+        }
+
+        .locked-content {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            position: relative;
+            width: 100%;
+        }
+
+        .unlocked-content {
+            width: 100%;
+        }
+
+        .locked-page.unlocked-display {
+            background: 
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(139, 69, 19, 0.02) 2px,
+                    rgba(139, 69, 19, 0.02) 4px
+                ),
+                linear-gradient(180deg, #f5f1e8 0%, #e8dcc4 50%, #ddd0c1 100%) !important;
+            color: #3d3d3d !important;
+            justify-content: flex-start;
+            align-items: flex-start;
+            text-align: left;
+            box-shadow: 
+                inset -15px 0 30px rgba(0, 0, 0, 0.15), 
+                inset 0 0 40px rgba(0, 0, 0, 0.05),
+                15px 0 30px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        .locked-page.unlocked-display h2 {
+            color: #6b3410;
+            border-color: #8b4513;
+        }
+
+        .locked-page.unlocked-display p {
+            color: #4a4a4a;
         }
 
         .lock-icon {
-            font-size: 8em;
-            color: #d4af37;
+            font-size: 7em;
             margin-bottom: 20px;
-            animation: wobble 3s infinite;
-        }
-
-        @keyframes wobble {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(-5deg); }
-            75% { transform: rotate(5deg); }
+            opacity: 0.8;
         }
 
         .locked-page h2 {
             color: #d4af37;
-            border-bottom: 3px solid #d4af37;
+            border-color: #8b7355;
         }
 
         .locked-page p {
             color: #e8dcc4;
-            font-size: 1.3em;
+            font-size: 1.1em;
             max-width: 70%;
+            text-align: center;
         }
 
         .qr-link {
             margin-top: 40px;
-            padding: 20px;
-            background: rgba(212, 175, 55, 0.1);
-            border: 2px solid #d4af37;
-            border-radius: 10px;
+            padding: 16px 40px;
+            background: #d4af37;
+            border: 2px solid #8b7355;
+            border-radius: 0;
             cursor: pointer;
-            transition: all 0.3s ease;
             text-decoration: none;
-            color: #d4af37;
-            font-size: 1.2em;
+            color: #2d1810;
+            font-size: 1.1em;
             font-weight: bold;
+            font-family: 'Crimson Text', serif;
             display: inline-block;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+            box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
         }
 
         .qr-link:hover {
-            background: rgba(212, 175, 55, 0.2);
-            transform: scale(1.05);
+            background: #e8c547;
+            transform: translateY(-2px);
+            box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.4);
         }
 
         .controls {
-            position: absolute;
-            bottom: 30px;
+            position: fixed;
+            bottom: 40px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
             gap: 20px;
-            z-index: 10;
+            z-index: 100;
+            background: #3d3d30;
+            padding: 20px 40px;
+            border: 2px solid #8b4513;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
         }
 
         button {
-            padding: 12px 30px;
+            padding: 12px 28px;
             background: #d4af37;
             color: #2d1810;
-            border: none;
-            border-radius: 5px;
-            font-size: 1em;
+            border: 2px solid #8b7355;
+            border-radius: 0;
             cursor: pointer;
             font-weight: bold;
             font-family: 'Crimson Text', serif;
+            font-size: 1em;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            letter-spacing: 0.5px;
+            box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
         }
 
-        button:hover {
+        button:hover:not(:disabled) {
             background: #e8c547;
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
         }
 
-        button:active {
+        button:active:not(:disabled) {
             transform: translateY(0);
+            box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
         }
 
         button:disabled {
@@ -224,186 +346,417 @@
             cursor: not-allowed;
         }
 
-        .page-indicator {
-            position: absolute;
-            top: 20px;
-            right: 40px;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.3em;
-            color: #8b7355;
+        .nav-arrow {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3em;
+            color: #d4af37;
+            cursor: pointer;
+            z-index: 100;
+            user-select: none;
+            transition: all 0.3s ease;
+            opacity: 0.7;
         }
 
-        .page.page-1 {
-            background: linear-gradient(135deg, #d4af37 0%, #e8dcc4 100%);
+        .nav-left {
+            left: 30px;
         }
 
+        .nav-right {
+            right: 30px;
+        }
+
+        .nav-arrow:hover:not(.disabled) {
+            opacity: 1;
+            transform: translateY(-50%) scale(1.2);
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+
+        .nav-arrow.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #e8dcc4;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #8b4513;
+            border: 2px solid #e8dcc4;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6b3410;
+        }
+
+        /* RESPONSIVE DESIGN */
         @media (max-width: 768px) {
-            .book-container {
-                height: auto;
-                aspect-ratio: 1;
+            html, body {
+                width: 100%;
+                height: 100%;
+            }
+
+            .pages-wrapper {
+                width: 600vw;
+                transition: transform 1s ease;
+            }
+
+            .pages-wrapper::before {
+                display: none;
             }
 
             .page {
-                padding: 30px 20px;
+                flex: 0 0 100vw;
+                width: 100vw;
+                padding: 40px 20px;
+                overflow-y: auto;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                text-align: center;
+            }
+
+            .page.page-1 {
+                padding: 60px 20px;
             }
 
             h1 {
-                font-size: 2em;
+                font-size: 2.2em;
+                text-align: center;
+                margin: 0 auto;
+            }
+
+            h1::before,
+            h1::after {
+                font-size: 0.8em;
+                margin: 10px auto;
+                display: block;
+            }
+
+            h2 {
+                font-size: 1.8em;
+                text-align: center;
+                margin: 0 auto 15px;
+            }
+
+            p {
+                font-size: 1.15em;
+                line-height: 1.8;
+                text-align: center;
+                margin: 0 auto 15px;
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .decorator {
+                font-size: 1.2em;
+                margin: 25px auto;
+                width: 100%;
+            }
+
+            .page-number {
+                bottom: 10px;
+                right: 15px;
+                font-size: 1.5em;
+                opacity: 0.9;
+            }
+
+            .lock-icon {
+                font-size: 5em;
+                margin: 0 auto 20px;
+            }
+
+            .qr-link {
+                padding: 14px 40px;
+                font-size: 1.1em;
+                margin: 20px auto;
+            }
+
+            .nav-arrow {
+                font-size: 2.5em;
+                width: auto;
+                height: auto;
+                background: transparent;
+                border-radius: 0;
+                padding: 10px;
+                -webkit-user-select: none;
+                user-select: none;
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            .nav-left {
+                left: 10px;
+            }
+
+            .nav-right {
+                right: 10px;
+            }
+
+            .nav-arrow:active:not(.disabled) {
+                opacity: 0.6;
+            }
+
+            @media (hover: none) {
+                .nav-arrow:hover:not(.disabled) {
+                    transform: translateY(-50%);
+                    background: transparent;
+                }
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page {
+                padding: 25px 15px;
+            }
+
+            .page.page-1 {
+                padding: 50px 15px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+                margin-bottom: 10px;
             }
 
             h2 {
                 font-size: 1.5em;
+                margin-bottom: 12px;
             }
 
             p {
-                font-size: 0.95em;
+                font-size: 1.05em;
+                margin-bottom: 12px;
+            }
+
+            .nav-arrow {
+                font-size: 2em;
+            }
+
+            .page-number {
+                font-size: 1.4em;
             }
         }
     </style>
 </head>
 <body>
     <div class="book-container">
-        <div class="book">
-            <div class="pages-wrapper" id="pagesWrapper">
-                <!-- Pagina 1: Titolo -->
-                <div class="page page-1">
-                    <div class="page-content">
-                        <div style="height: 150px;"></div>
-                        <h1 style="text-align: center; color: #2d1810;">Il Mistero Svelato</h1>
-                        <div class="decorator">🔍</div>
-                        <p style="text-align: center; color: #8b4513; font-size: 1.3em; font-style: italic;">
-                            Un viaggio attraverso gli indizi nascosti
-                        </p>
-                        <div style="height: 150px;"></div>
-                    </div>
-                    <div class="page-number">1</div>
-                </div>
+        <div class="pages-wrapper" id="pagesWrapper">
+            <div class="page page-1">
+                <h1>Il Mistero Svelato</h1>
+                <p style="text-align: center; color: #8b4513; font-size: 1.3em; font-style: italic;">
+                    Un viaggio attraverso gli indizi nascosti
+                </p>
+                <div class="page-number">1</div>
+            </div>
 
-                <!-- Pagina 2: BLOCCATA -->
-                <div class="page locked-page">
-                    <div class="page-content">
-                        <div class="lock-icon">🔐</div>
-                        <h2>Capitolo I</h2>
-                        <p>Questa pagina è bloccata.</p>
-                        <p style="font-size: 1em; margin-top: 20px;">Inquadra il QR code per ottenere il codice di sblocco</p>
-                        <a href="#" class="qr-link" onclick="openUnlock('page2')">Accedi al QR Code</a>
-                    </div>
-                    <div class="page-number">2</div>
+            <div class="page locked-page" id="page-2">
+                <div class="locked-content">
+                    <div class="lock-icon">🔐</div>
+                    <h2>Capitolo I</h2>
+                    <p>Questa pagina è bloccata.</p>
+                    <a href="#" class="qr-link" onclick="openUnlock(event, '2')">Accedi al QR Code</a>
                 </div>
+                <div class="unlocked-content" style="display: none;">
+                    <h2>Capitolo I - Il Movente</h2>
+                    <p>All'alba di quel freddo lunedì, la vittima giaceva immobile nella biblioteca di Darkfield Manor. Lord Ashworth era stato un uomo di molti segreti, nemico di molti e amico di pochi.</p>
+                    <p>Il detective osserva attentamente la scena: nessun segno di lotta, nessun'arma visibile. Eppure lo sguardo fisso del cadavere raccontava una storia di terrore supremo.</p>
+                    <div class="decorator">◆  ◆  ◆</div>
+                    <p>Tre testimoni erano presenti nella dimora quella notte. Tre persone con tre motivi irrefutabili. La vendetta, il denaro, il segreto.</p>
+                </div>
+                <div class="page-number">2</div>
+            </div>
 
-                <!-- Pagina 3: Contenuto -->
-                <div class="page">
-                    <div class="page-content">
-                        <h2>Il Primo Indizio</h2>
-                        <p>La storia ha inizio in una fredda notte d'inverno, quando il detective riceve una misteriosa lettera anonima. L'inchiostro blu scuro su carta pergamena rivela solo poche parole: "La verità si cela dove meno te l'aspetti".</p>
-                        <p>Ma cosa significa davvero? Il nostro eroe inizia il suo viaggio alla ricerca di risposte, seguendo tracce quasi invisibili che lo porteranno in angoli dimenticati della città.</p>
-                        <div class="decorator">⚜️</div>
-                        <p>Ogni dettaglio conta, ogni parola ha un significato nascosto. Come in un intricato gioco di scacchi, i pezzi iniziano lentamente a muoversi verso la loro destinazione finale.</p>
-                    </div>
-                    <div class="page-number">3</div>
-                </div>
+            <div class="page">
+                <h2>Il Primo Indizio</h2>
+                <p>La storia ha inizio in una fredda notte d'inverno, quando il detective riceve una misteriosa lettera anonima.</p>
+                <p>L'inchiostro blu scuro su carta pergamena rivela solo poche parole: "La verità si cela dove meno te l'aspetti".</p>
+                <div class="decorator">◆  ◆  ◆</div>
+                <p>Ogni dettaglio conta, ogni parola ha un significato nascosto.</p>
+                <div class="page-number">3</div>
+            </div>
 
-                <!-- Pagina 4: BLOCCATA -->
-                <div class="page locked-page">
-                    <div class="page-content">
-                        <div class="lock-icon">🔐</div>
-                        <h2>Capitolo II</h2>
-                        <p>Questa pagina è bloccata.</p>
-                        <p style="font-size: 1em; margin-top: 20px;">Inquadra il QR code per ottenere il codice di sblocco</p>
-                        <a href="#" class="qr-link" onclick="openUnlock('page4')">Accedi al QR Code</a>
-                    </div>
-                    <div class="page-number">4</div>
+            <div class="page locked-page" id="page-4">
+                <div class="locked-content">
+                    <div class="lock-icon">🔐</div>
+                    <h2>Capitolo II</h2>
+                    <p>Questa pagina è bloccata.</p>
+                    <a href="#" class="qr-link" onclick="openUnlock(event, '4')">Accedi al QR Code</a>
                 </div>
+                <div class="unlocked-content" style="display: none;">
+                    <h2>Capitolo II - La Ragnatela</h2>
+                    <p>Le menzogne si dipanano come un filo d'Arianna attraverso le testimonianze. Lady Ashworth negava di aver sentito alcun grido. Eppure il giardiniere giurava di aver udito urla poco dopo le due di notte.</p>
+                    <p>E poi c'era il segretario, pale e ansimante, il quale confessava infine di aver visto una figura in abito nero scendere le scale verso le tre. Una figura che non era né la padrona né i domestici.</p>
+                    <div class="decorator">◆  ◆  ◆</div>
+                    <p>Il detective sorride amaro. Qualcuno mentiva. Anzi, probabilmente tutti mentivano. La questione era solo: chi mentiva per amore e chi per colpa?</p>
+                </div>
+                <div class="page-number">4</div>
+            </div>
 
-                <!-- Pagina 5: Contenuto -->
-                <div class="page">
-                    <div class="page-content">
-                        <h2>La Trama si Infittisce</h2>
-                        <p>Mentre il detective prosegue la sua ricerca, scopre che non è solo. Altre figure ombrose si aggirano nei corridoi della verità, ognuna con i propri segreti e le proprie motivazioni.</p>
-                        <p>Le prove si accumulano, ma ogni risposta genera nuove domande. Chi può fidarsi? Chi nasconde la verità?</p>
-                        <div class="decorator">💀</div>
-                        <p>La vendetta, il tradimento, l'amore non corrisposto: tutti motivi per commettere crimini efferati. Il detective sa che la soluzione è lì, a pochi passi, ma prima deve capire quali fili tirare.</p>
-                    </div>
-                    <div class="page-number">5</div>
-                </div>
+            <div class="page">
+                <h2>La Trama si Infittisce</h2>
+                <p>Mentre il detective prosegue la sua ricerca, scopre che non è solo.</p>
+                <p>Altre figure ombrose si aggirano nei corridoi della verità, ognuna con i propri segreti.</p>
+                <div class="decorator">◆  ◆  ◆</div>
+                <p>Le prove si accumulano, ma ogni risposta genera nuove domande.</p>
+                <div class="page-number">5</div>
+            </div>
 
-                <!-- Pagina 6: BLOCCATA -->
-                <div class="page locked-page">
-                    <div class="page-content">
-                        <div class="lock-icon">🔐</div>
-                        <h2>Il Capitolo Finale</h2>
-                        <p>Questa pagina è bloccata.</p>
-                        <p style="font-size: 1em; margin-top: 20px;">Inquadra il QR code per ottenere il codice di sblocco</p>
-                        <a href="#" class="qr-link" onclick="openUnlock('page6')">Accedi al QR Code</a>
-                    </div>
-                    <div class="page-number">6</div>
+            <div class="page locked-page" id="page-6">
+                <div class="locked-content">
+                    <div class="lock-icon">🔐</div>
+                    <h2>Il Capitolo Finale</h2>
+                    <p>Questa pagina è bloccata.</p>
+                    <a href="#" class="qr-link" onclick="openUnlock(event, '6')">Accedi al QR Code</a>
                 </div>
+                <div class="unlocked-content" style="display: none;">
+                    <h2>Epilogo - La Verità Svelata</h2>
+                    <p>Era il segretario. Non per furore passionale, non per avidità di eredità, bensì per protezione. Lord Ashworth aveva scoperto un segreto che avrebbe distrutto due famiglie, compromesso due onori.</p>
+                    <p>Un atto di disperazione nella notte, per salvare l'innocente dal disonore. La giustizia, fredda e inesorabile, non conosce pietà. Eppure il detective, calando le carte sul tavolo, si chiede quale sia la vera criminalità: l'omicidio, o il silenzio complice del mondo.</p>
+                    <div class="decorator">◆  ◆  ◆</div>
+                    <p>A Londra, come sempre, piove. E i segreti rimangono sepolti nei meandri di quella nebbia grigia che non rivela, mai, tutte le sue verità.</p>
+                </div>
+                <div class="page-number">6</div>
             </div>
         </div>
 
-        <!-- Controlli di navigazione -->
-        <div class="controls">
-            <button onclick="previousPage()" id="prevBtn">← Indietro</button>
-            <button onclick="nextPage()" id="nextBtn">Avanti →</button>
-        </div>
+        <div class="nav-arrow nav-left" onclick="previousPage()" id="prevBtn">❮</div>
+        <div class="nav-arrow nav-right" onclick="nextPage()" id="nextBtn">❯</div>
     </div>
 
     <script>
-        let currentPage = 0;
-        const pages = document.querySelectorAll('.page');
-        const totalPages = pages.length;
-
-        function showPage(index) {
-            // Clamp index tra 0 e totalPages - 1
-            if (index < 0) index = 0;
-            if (index >= totalPages) index = totalPages - 1;
-
-            currentPage = index;
-
-            // Calcola lo scorrimento orizzontale
-            const offset = -index * 100;
-            document.getElementById('pagesWrapper').style.transform = `translateX(${offset}%)`;
-
-            // Aggiorna i bottoni
-            document.getElementById('prevBtn').disabled = index === 0;
-            document.getElementById('nextBtn').disabled = index === totalPages - 1;
+        let curPage = 0;
+        const totalPages = document.querySelectorAll('.page').length;
+        
+        // Calcola quante pagine mostrare per view (1 su mobile, 2 su desktop)
+        function getPagesPerView() {
+            return window.innerWidth > 768 ? 2 : 1;
+        }
+        
+        function getTotalViews() {
+            const pagesPerView = getPagesPerView();
+            return Math.ceil(totalPages / pagesPerView);
         }
 
-        function nextPage() {
-            showPage(currentPage + 1);
-        }
-
-        function previousPage() {
-            showPage(currentPage - 1);
-        }
-
-        function openUnlock(pageId) {
-            event.preventDefault();
-            // Estrai il numero della pagina dal pageId (es: "page2" -> 2)
-            const pageNum = pageId.replace('page', '');
-            // Apri la pagina di sblocco con il numero della pagina
-            window.location.href = `unlock.html?page=${pageNum}`;
-        }
-
-        // Controlla al caricamento quali pagine sbloccate
-        function updateLockedPages() {
-            for (let i = 2; i <= 6; i += 2) {
-                const isUnlocked = localStorage.getItem(`page${i}_unlocked`) === 'true';
-                const pageElement = pages[i - 1]; // Indice 0-based
+        // Verifica e applica gli sblocchi delle pagine
+        function checkAndApplyUnlocks() {
+            for (let pageNum of [2, 4, 6]) {
+                const storedData = localStorage.getItem(`page${pageNum}_unlocked`);
                 
-                if (isUnlocked) {
-                    pageElement.classList.remove('locked-page');
-                    // Qui dovrai aggiungere il contenuto effettivo della pagina
-                    // Per ora lascio il placeholder
+                if (storedData) {
+                    try {
+                        const data = JSON.parse(storedData);
+                        const now = Date.now();
+                        
+                        // Verifica se il token è scaduto (24 ore)
+                        if (data.expiry && now > data.expiry) {
+                            // Token scaduto, rimuovilo
+                            localStorage.removeItem(`page${pageNum}_unlocked`);
+                            continue;
+                        }
+                        
+                        // Token valido
+                        if (data.unlocked) {
+                            const pageElement = document.getElementById(`page-${pageNum}`);
+                            
+                            if (pageElement) {
+                                const lockedContent = pageElement.querySelector('.locked-content');
+                                const unlockedContent = pageElement.querySelector('.unlocked-content');
+                                
+                                if (lockedContent) lockedContent.style.display = 'none';
+                                if (unlockedContent) unlockedContent.style.display = 'block';
+                                pageElement.classList.add('unlocked-display');
+                            }
+                        }
+                    } catch (e) {
+                        // Se c'è un errore nel parsing, rimuovi il dato corrotto
+                        localStorage.removeItem(`page${pageNum}_unlocked`);
+                    }
                 }
             }
         }
 
-        // Inizializza
-        showPage(0);
-        updateLockedPages();
+        function showPage(viewIdx) {
+            const totalViews = getTotalViews();
+            if (viewIdx < 0) viewIdx = 0;
+            if (viewIdx >= totalViews) viewIdx = totalViews - 1;
+            
+            curPage = viewIdx;
+            const wrapper = document.getElementById('pagesWrapper');
+            wrapper.style.transform = `translateX(${-viewIdx * 100}vw)`;
+            
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            prevBtn.classList.toggle('disabled', viewIdx === 0);
+            nextBtn.classList.toggle('disabled', viewIdx === totalViews - 1);
+        }
 
-        // Consenti la navigazione con i tasti
+        function nextPage() {
+            showPage(curPage + 1);
+        }
+
+        function previousPage() {
+            showPage(curPage - 1);
+        }
+
+        function openUnlock(e, pageNum) {
+            e.preventDefault();
+            window.location.href = `unlock.html?page=${pageNum}`;
+        }
+
+        // Inizializza all'apertura
+        checkAndApplyUnlocks();
+        
+        // Verifica se c'è un hash per la navigazione (da unlock.html)
+        const hash = window.location.hash;
+        const viewParam = new URLSearchParams(hash.slice(1)).get('view');
+        const initialView = viewParam ? parseInt(viewParam) : 0;
+        
+        showPage(initialView);
+
+        // Verifica periodicamente i cambiamenti (utile se cambiano altri tab)
+        setInterval(checkAndApplyUnlocks, 500);
+
+        // Gestisci il resize della finestra
+        window.addEventListener('resize', () => {
+            showPage(curPage);
+        });
+
+        // Touch swipe per mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, false);
+
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, false);
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    // Swipe sinistra = pagina successiva
+                    nextPage();
+                } else {
+                    // Swipe destra = pagina precedente
+                    previousPage();
+                }
+            }
+        }
+
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowLeft') previousPage();
             if (e.key === 'ArrowRight') nextPage();

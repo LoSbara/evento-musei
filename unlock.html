@@ -198,15 +198,21 @@
             }
 
             if (inputCode === correctCodes[pageNum]) {
-                // Salva lo stato nel localStorage
-                localStorage.setItem(`page${pageNum}_unlocked`, 'true');
+                // Salva lo stato nel localStorage con timestamp (24 ore di validità)
+                const expiryTime = Date.now() + (24 * 60 * 60 * 1000); // 24 ore da ora
+                localStorage.setItem(`page${pageNum}_unlocked`, JSON.stringify({
+                    unlocked: true,
+                    expiry: expiryTime
+                }));
 
                 messageEl.textContent = '✅ Codice corretto! Pagina sbloccata!';
                 messageEl.className = 'message success';
 
-                // Reindirizza al libro dopo 1.5 secondi
+                // Reindirizza al libro sulla pagina giusta dopo 1.5 secondi
                 setTimeout(() => {
-                    window.location.href = `index.html`;
+                    // Calcola quale view mostrare (page 2 = view 0, page 4 = view 1, page 6 = view 2)
+                    const viewIdx = (pageNum - 2) / 2;
+                    window.location.href = `index.html#view=${viewIdx}`;
                 }, 1500);
             } else {
                 messageEl.textContent = '❌ Codice errato. Riprova!';
