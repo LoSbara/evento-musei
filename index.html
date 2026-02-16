@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Il Mistero Svelato</title>
+    <title>Diario di Philippe De Rouge</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital@0;1&family=Playfair+Display:wght@700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital@0;1&family=Playfair+Display:wght@700;900&family=Great+Vibes&display=swap');
 
         * {
             margin: 0;
@@ -20,8 +20,8 @@
         }
 
         body {
-            background: #2a2a1f url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect fill="%232a2a1f" width="100" height="100"/><circle cx="10" cy="10" r="1" fill="%23000" opacity="0.05"/><circle cx="30" cy="40" r="1" fill="%23000" opacity="0.03"/><circle cx="70" cy="20" r="1" fill="%23000" opacity="0.04"/></svg>');
-            font-family: 'Crimson Text', serif;
+            background: #2a2a1f url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect fill="%232a2a1f" width="100" height="100"/><circle cx="10" cy="10" r="1" fill="%23000" opacity="0.05"/></svg>');
+            font-family: 'Courier Prime', monospace;
             color: #3d3d3d;
         }
 
@@ -79,6 +79,9 @@
                 inset 0 0 40px rgba(0, 0, 0, 0.05),
                 15px 0 30px rgba(0, 0, 0, 0.3);
             border-right: 1px solid rgba(139, 69, 19, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
         }
 
         .page:nth-child(odd) {
@@ -127,13 +130,16 @@
                     rgba(139, 69, 19, 0.02) 4px
                 ),
                 linear-gradient(135deg, #d4af37 0%, #c9a227 50%, #e8dcc4 100%);
+            justify-content: center;
+            align-items: center;
+            text-align: center;
         }
 
         .page-number {
             position: absolute;
             bottom: 30px;
             right: 40px;
-            color: #8b7355;
+            color: #81694b;
             font-size: 1.1em;
             font-family: 'Playfair Display', serif;
             opacity: 0.6;
@@ -141,55 +147,54 @@
 
         h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 3.2em;
-            font-weight: 900;
+            font-size: 2.8em;
+            font-weight: 700;
             color: #2d1810;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             text-align: center;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-        }
-
-        h1::before,
-        h1::after {
-            content: '✦';
-            display: block;
-            font-size: 0.6em;
-            letter-spacing: 10px;
-            color: #8b4513;
-            margin: 15px 0;
+            letter-spacing: 2px;
         }
 
         h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.2em;
-            font-weight: 700;
-            color: #6b3410;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #8b4513;
-            letter-spacing: 1px;
+            font-family: 'Courier Prime', monospace;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #2d1810;
+            margin-bottom: 15px;
+            margin-top: 20px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed #8b4513;
+            letter-spacing: 0.5px;
         }
 
-        h2::before {
-            content: '❦ ';
-            color: #8b4513;
-            font-size: 1.1em;
+        h2:first-child {
+            margin-top: 0;
         }
 
         p {
-            font-size: 1.1em;
-            line-height: 1.9;
-            margin-bottom: 18px;
-            text-align: justify;
-            color: #4a4a4a;
+            font-size: 0.95em;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            text-align: left;
+            color: #3d3d3d;
+            font-family: 'Courier Prime', monospace;
+            letter-spacing: 0.3px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #8b4513;
+            font-size: 1.2em;
+            font-style: italic;
+            margin-bottom: 30px;
+            font-family: 'Playfair Display', serif;
         }
 
         .decorator {
             text-align: center;
-            font-size: 1.5em;
+            font-size: 1.2em;
             color: #8b4513;
-            margin: 35px 0;
+            margin: 20px 0;
             opacity: 0.7;
             letter-spacing: 8px;
         }
@@ -214,7 +219,6 @@
                 inset -15px 0 30px rgba(0, 0, 0, 0.3),
                 inset 0 0 40px rgba(0, 0, 0, 0.2),
                 15px 0 30px rgba(0, 0, 0, 0.4) !important;
-            padding: 60px 80px !important;
         }
 
         .locked-content {
@@ -226,11 +230,33 @@
             width: 100%;
         }
 
-        .unlocked-content {
+        .locked-page.unlocked-display .unlocked-content {
+            display: block !important;
             width: 100%;
+            flex: 1;
+        }
+
+        .locked-page.unlocked-display p {
+            font-size: 0.95em !important;
+            line-height: 1.8 !important;
+            color: #3d3d3d !important;
+            margin-bottom: 15px;
+            max-width: 100% !important;
+        }
+
+        .locked-page.unlocked-display h2 {
+            font-size: 1.1em !important;
+            color: #2d1810 !important;
+            border-color: #8b4513 !important;
+            margin-top: 20px;
+            margin-bottom: 15px;
         }
 
         .locked-page.unlocked-display {
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: flex-start !important;
+            align-items: stretch !important;
             background: 
                 repeating-linear-gradient(
                     90deg,
@@ -241,40 +267,34 @@
                 ),
                 linear-gradient(180deg, #f5f1e8 0%, #e8dcc4 50%, #ddd0c1 100%) !important;
             color: #3d3d3d !important;
-            justify-content: flex-start;
-            align-items: flex-start;
-            text-align: left;
+            text-align: left !important;
             box-shadow: 
                 inset -15px 0 30px rgba(0, 0, 0, 0.15), 
                 inset 0 0 40px rgba(0, 0, 0, 0.05),
                 15px 0 30px rgba(0, 0, 0, 0.3) !important;
+            overflow-y: auto !important;
         }
 
-        .locked-page.unlocked-display h2 {
-            color: #6b3410;
-            border-color: #8b4513;
-        }
-
-        .locked-page.unlocked-display p {
-            color: #4a4a4a;
+        .locked-page.unlocked-display .handwritten-note {
+            margin-top: auto;
         }
 
         .lock-icon {
-            font-size: 7em;
-            margin-bottom: 20px;
+            font-size: 6em;
+            margin-bottom: 30px;
             opacity: 0.8;
         }
 
         .locked-page h2 {
             color: #d4af37;
             border-color: #8b7355;
+            font-size: 1.3em;
         }
 
         .locked-page p {
             color: #e8dcc4;
-            font-size: 1.1em;
-            max-width: 70%;
-            text-align: center;
+            font-size: 1.05em;
+            max-width: 80%;
         }
 
         .qr-link {
@@ -286,9 +306,9 @@
             cursor: pointer;
             text-decoration: none;
             color: #2d1810;
-            font-size: 1.1em;
+            font-size: 1em;
             font-weight: bold;
-            font-family: 'Crimson Text', serif;
+            font-family: 'Courier Prime', monospace;
             display: inline-block;
             transition: all 0.3s ease;
             letter-spacing: 1px;
@@ -299,6 +319,27 @@
             background: #e8c547;
             transform: translateY(-2px);
             box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .handwritten-note {
+            font-family: 'Great Vibes', cursive;
+            color: #1e5f99;
+            font-size: 1.2em;
+            font-style: italic;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px dotted #8b4513;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .signature {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5em;
+            color: #2d1810;
+            text-align: right;
+            margin-top: 20px;
+            font-style: italic;
         }
 
         .controls {
@@ -323,8 +364,8 @@
             border-radius: 0;
             cursor: pointer;
             font-weight: bold;
-            font-family: 'Crimson Text', serif;
-            font-size: 1em;
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.95em;
             transition: all 0.3s ease;
             letter-spacing: 0.5px;
             box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
@@ -347,39 +388,11 @@
         }
 
         .nav-arrow {
-            position: fixed;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 3em;
-            color: #d4af37;
-            cursor: pointer;
-            z-index: 100;
-            user-select: none;
-            transition: all 0.3s ease;
-            opacity: 0.7;
-        }
-
-        .nav-left {
-            left: 30px;
-        }
-
-        .nav-right {
-            right: 30px;
-        }
-
-        .nav-arrow:hover:not(.disabled) {
-            opacity: 1;
-            transform: translateY(-50%) scale(1.2);
-            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
-        }
-
-        .nav-arrow.disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
+            display: none;
         }
 
         ::-webkit-scrollbar {
-            width: 10px;
+            width: 8px;
         }
 
         ::-webkit-scrollbar-track {
@@ -395,20 +408,9 @@
             background: #6b3410;
         }
 
-        /* RESPONSIVE DESIGN */
         @media (max-width: 768px) {
-            html, body {
-                width: 100%;
-                height: 100%;
-            }
-
             .pages-wrapper {
-                width: 600vw;
-                transition: transform 1s ease;
-            }
-
-            .pages-wrapper::before {
-                display: none;
+                width: 2400vw !important;
             }
 
             .page {
@@ -416,98 +418,47 @@
                 width: 100vw;
                 padding: 40px 20px;
                 overflow-y: auto;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: flex-start;
-                text-align: center;
             }
 
             .page.page-1 {
-                padding: 60px 20px;
+                padding: 50px 20px;
             }
 
             h1 {
-                font-size: 2.2em;
-                text-align: center;
-                margin: 0 auto;
-            }
-
-            h1::before,
-            h1::after {
-                font-size: 0.8em;
-                margin: 10px auto;
-                display: block;
+                font-size: 2em;
             }
 
             h2 {
-                font-size: 1.8em;
-                text-align: center;
-                margin: 0 auto 15px;
+                font-size: 1em;
             }
 
             p {
-                font-size: 1.15em;
-                line-height: 1.8;
-                text-align: center;
-                margin: 0 auto 15px;
-                width: 100%;
-                max-width: 100%;
-            }
-
-            .decorator {
-                font-size: 1.2em;
-                margin: 25px auto;
-                width: 100%;
+                font-size: 0.9em;
+                line-height: 1.7;
             }
 
             .page-number {
                 bottom: 10px;
                 right: 15px;
-                font-size: 1.5em;
-                opacity: 0.9;
+                font-size: 1.2em;
             }
 
             .lock-icon {
-                font-size: 5em;
-                margin: 0 auto 20px;
+                font-size: 4em;
+                margin-bottom: 20px;
             }
 
             .qr-link {
-                padding: 14px 40px;
+                padding: 12px 30px;
+                font-size: 0.9em;
+            }
+
+            .handwritten-note {
                 font-size: 1.1em;
-                margin: 20px auto;
             }
 
-            .nav-arrow {
-                font-size: 2.5em;
-                width: auto;
-                height: auto;
-                background: transparent;
-                border-radius: 0;
-                padding: 10px;
-                -webkit-user-select: none;
-                user-select: none;
-                -webkit-tap-highlight-color: transparent;
-            }
-
-            .nav-left {
-                left: 10px;
-            }
-
-            .nav-right {
-                right: 10px;
-            }
-
-            .nav-arrow:active:not(.disabled) {
-                opacity: 0.6;
-            }
-
-            @media (hover: none) {
-                .nav-arrow:hover:not(.disabled) {
-                    transform: translateY(-50%);
-                    background: transparent;
-                }
+            .signature {
+                font-size: 2em;
             }
         }
 
@@ -516,31 +467,12 @@
                 padding: 25px 15px;
             }
 
-            .page.page-1 {
-                padding: 50px 15px;
-            }
-
             h1 {
-                font-size: 1.8em;
-                margin-bottom: 10px;
-            }
-
-            h2 {
-                font-size: 1.5em;
-                margin-bottom: 12px;
+                font-size: 1.6em;
             }
 
             p {
-                font-size: 1.05em;
-                margin-bottom: 12px;
-            }
-
-            .nav-arrow {
-                font-size: 2em;
-            }
-
-            .page-number {
-                font-size: 1.4em;
+                font-size: 0.85em;
             }
         }
     </style>
@@ -548,81 +480,322 @@
 <body>
     <div class="book-container">
         <div class="pages-wrapper" id="pagesWrapper">
+            <!-- PAGINA 1: COPERTINA -->
             <div class="page page-1">
-                <h1>Il Mistero Svelato</h1>
-                <p style="text-align: center; color: #8b4513; font-size: 1.3em; font-style: italic;">
-                    Un viaggio attraverso gli indizi nascosti
-                </p>
+                <h1>Diario</h1>
+                <p class="subtitle">di Philippe De Rouge</p>
+                <p class="subtitle" style="font-size: 0.9em; margin-top: 60px;">Pistoia, Novembre - Dicembre 1938</p>
                 <div class="page-number">1</div>
             </div>
 
-            <div class="page locked-page" id="page-2">
-                <div class="locked-content">
-                    <div class="lock-icon">🔐</div>
-                    <h2>Capitolo I</h2>
-                    <p>Questa pagina è bloccata.</p>
-                    <a href="#" class="qr-link" onclick="openUnlock(event, '2')">Accedi al QR Code</a>
-                </div>
-                <div class="unlocked-content" style="display: none;">
-                    <h2>Capitolo I - Il Movente</h2>
-                    <p>All'alba di quel freddo lunedì, la vittima giaceva immobile nella biblioteca di Darkfield Manor. Lord Ashworth era stato un uomo di molti segreti, nemico di molti e amico di pochi.</p>
-                    <p>Il detective osserva attentamente la scena: nessun segno di lotta, nessun'arma visibile. Eppure lo sguardo fisso del cadavere raccontava una storia di terrore supremo.</p>
-                    <div class="decorator">◆  ◆  ◆</div>
-                    <p>Tre testimoni erano presenti nella dimora quella notte. Tre persone con tre motivi irrefutabili. La vendetta, il denaro, il segreto.</p>
-                </div>
+            <!-- PAGINA 2: SABATO 18 OTTOBRE -->
+            <div class="page">
+                <h2>Sabato 18 Ottobre.</h2>
+                <p>Giungo finalmente nella città di Pistoia.</p>
+                <p>Il mio lavoro di ricerca qui sarà finanziato dalla fondazione che cura i musei cittadini e l'uomo che mi riceve si chiama Marco Vezzosi. Mi sembra un brav'uomo, degno di fiducia, al contempo serio e piacevolmente divertente. Sono certo che ci troveremo bene assieme.</p>
+                <p>Oggi è un sabato caldo, nonostante l'autunno alle porte e già lunedì Marco mi porterà in giro per i musei e mi mostrerà la città.</p>
+                <p>Non vedo l'ora!</p>
                 <div class="page-number">2</div>
             </div>
 
+            <!-- PAGINA 3: MARTEDÌ 21 OTTOBRE -->
             <div class="page">
-                <h2>Il Primo Indizio</h2>
-                <p>La storia ha inizio in una fredda notte d'inverno, quando il detective riceve una misteriosa lettera anonima.</p>
-                <p>L'inchiostro blu scuro su carta pergamena rivela solo poche parole: "La verità si cela dove meno te l'aspetti".</p>
-                <div class="decorator">◆  ◆  ◆</div>
-                <p>Ogni dettaglio conta, ogni parola ha un significato nascosto.</p>
+                <h2>Martedì 21 Ottobre.</h2>
+                <p>Sono entusiasta della città e delle sue bellezze.</p>
+                <p>Anche se i documenti che dovrò visionare mi sembrano un poco abbandonati e mi chiedo come mai nessuno li abbia visionati, sono però entusiasta che l'offerta di occuparmene sia capitata a me. Probabilmente devo tutto a quel lavoro di archivio svolto l'anno scorso a Carcassonne.</p>
+                <p>Sia come sia, mi darò da fare.</p>
                 <div class="page-number">3</div>
             </div>
 
-            <div class="page locked-page" id="page-4">
-                <div class="locked-content">
-                    <div class="lock-icon">🔐</div>
-                    <h2>Capitolo II</h2>
-                    <p>Questa pagina è bloccata.</p>
-                    <a href="#" class="qr-link" onclick="openUnlock(event, '4')">Accedi al QR Code</a>
-                </div>
-                <div class="unlocked-content" style="display: none;">
-                    <h2>Capitolo II - La Ragnatela</h2>
-                    <p>Le menzogne si dipanano come un filo d'Arianna attraverso le testimonianze. Lady Ashworth negava di aver sentito alcun grido. Eppure il giardiniere giurava di aver udito urla poco dopo le due di notte.</p>
-                    <p>E poi c'era il segretario, pale e ansimante, il quale confessava infine di aver visto una figura in abito nero scendere le scale verso le tre. Una figura che non era né la padrona né i domestici.</p>
-                    <div class="decorator">◆  ◆  ◆</div>
-                    <p>Il detective sorride amaro. Qualcuno mentiva. Anzi, probabilmente tutti mentivano. La questione era solo: chi mentiva per amore e chi per colpa?</p>
-                </div>
+            <!-- PAGINA 4: VENERDÌ 24 OTTOBRE -->
+            <div class="page">
+                <h2>Venerdì 24 Ottobre.</h2>
+                <p>I documenti che sto visionando sono stati accantonati pochi anni prima dello scoppio della seconda guerra mondiale, da quel che ho capito, rimanendo inscatolati per quasi novant'anni; li hanno riscoperti in seguito a una riorganizzazione delle biblioteche cittadine.</p>
+                <p>Parlano prevalentemente delle grandi famiglie che hanno fatto la storia della città nel medioevo; ci sono alcuni documenti o copie di essi che risultano addirittura antecedenti all'anno 1000, quando ancora la città non era un libero comune.</p>
+                <p>Sono prevalentemente atti legali, compravendite, accordi commerciali, registrazioni natali, ma ci sono anche alcune raccolte epistolari.</p>
+                <p>E' molto interessante per uno storico come me, ma non so quanto possa risultarlo per chi invece non lo è. Probabilmente se dovessi riportare le mie ricerche a qualcuno al di fuori dell'ambito, non capirebbe perché io sia così emozionato all'idea di questo impegno. Ma è grazie al lavoro di catalogazione che sto eseguendo su questi reperti che un giorno magari sarà possibile capire come pensavano in quegli anni.</p>
                 <div class="page-number">4</div>
             </div>
 
-            <div class="page">
-                <h2>La Trama si Infittisce</h2>
-                <p>Mentre il detective prosegue la sua ricerca, scopre che non è solo.</p>
-                <p>Altre figure ombrose si aggirano nei corridoi della verità, ognuna con i propri segreti.</p>
-                <div class="decorator">◆  ◆  ◆</div>
-                <p>Le prove si accumulano, ma ogni risposta genera nuove domande.</p>
-                <div class="page-number">5</div>
+            <!-- PAGINA 5: TESTO BLOCCATO CON 588 -->
+            <div class="page locked-page" id="page-5">
+                <div class="locked-content">
+                    <div class="lock-icon">🔐</div>
+                    <h2>Sezione Bloccata</h2>
+                    <p>Questo diario contiene segreti più profondi di quanto sembri.</p>
+                    <a href="#" class="qr-link" onclick="openUnlock(event, '5')">Inserisci il Codice</a>
+                </div>
+                <div class="unlocked-content" style="display: none;">
+                    <h2>Sabato 1 Novembre.</h2>
+                    <p>Non credevo ai miei occhi quando ho trovato i due documenti.</p>
+                    <p>Erano ravvicinati. Probabilmente chi aveva avviato la catalogazione nel 1938 e non era riuscito a portarla a termine si era già accorto del collegamento.</p>
+                    <p>A me sono saltati all'occhio per via del cognome. D'altronde se su un documento di poco successivo all'anno 1000 ti capita di vedere il tuo cognome nero su bianco, come fai a non notarlo?</p>
+                    <p>Mio nonno mi aveva raccontato un sacco di cose della vicenda di famiglia, ma finché non ho visto il documento non sono arrivato a fare due più due. E che dire della lettera? E' proprio vero che la mela non cade mai troppo lontana dall'albero.</p>
+                    <div class="page-number">5</div>
+                </div>
             </div>
 
+            <!-- PAGINA 6: TESTO BLOCCATO CON 588 (CONT.) -->
             <div class="page locked-page" id="page-6">
                 <div class="locked-content">
                     <div class="lock-icon">🔐</div>
-                    <h2>Il Capitolo Finale</h2>
-                    <p>Questa pagina è bloccata.</p>
-                    <a href="#" class="qr-link" onclick="openUnlock(event, '6')">Accedi al QR Code</a>
+                    <h2>Sezione Bloccata</h2>
+                    <p>Prosegui sblocccando il diario...</p>
                 </div>
                 <div class="unlocked-content" style="display: none;">
-                    <h2>Epilogo - La Verità Svelata</h2>
-                    <p>Era il segretario. Non per furore passionale, non per avidità di eredità, bensì per protezione. Lord Ashworth aveva scoperto un segreto che avrebbe distrutto due famiglie, compromesso due onori.</p>
-                    <p>Un atto di disperazione nella notte, per salvare l'innocente dal disonore. La giustizia, fredda e inesorabile, non conosce pietà. Eppure il detective, calando le carte sul tavolo, si chiede quale sia la vera criminalità: l'omicidio, o il silenzio complice del mondo.</p>
-                    <div class="decorator">◆  ◆  ◆</div>
-                    <p>A Londra, come sempre, piove. E i segreti rimangono sepolti nei meandri di quella nebbia grigia che non rivela, mai, tutte le sue verità.</p>
+                    <p>Ieri ho fatto tutte le verifiche del caso, chiamando gli archivi di Parigi, che confermano la vicenda e oggi ho fissato un incontro con Vezzosi per parlarne, questo lunedì.</p>
+                    <p>Oramai ogni crimine è ampiamente caduto in prescrizione, ma non vedo perché non divulgare la cosa; certo, è un po' paradossale che la famiglia che mi ha pagato per venire a lavorare a Pistoia riceva questa bella doccia fredda, ma la cosa non si può evitare. La verità è ben più importante.</p>
+                    <h2>Lunedì 3 Novembre.</h2>
+                    <p>Marco è stato comprensivo circa l'importanza della cosa e mi aiuterà come può.</p>
+                    <p>Ha accettato di attendere a divulgare la cosa oltre noi, finché non avrò finito di catalogare i documenti, controllato le fonti e chiarito i dubbi. Pare ci siano delle discrete discrepanze tra quello che dice la lettera e gli atti ufficiali, per cui il tutto merita un'indagine approfondita.</p>
+                    <p>Fosse reale, forse alla famiglia potrebbe toccare anche versare qualche risarcimento.</p>
+                    <div class="page-number">6</div>
                 </div>
-                <div class="page-number">6</div>
+            </div>
+
+            <!-- PAGINA 7: TESTO BLOCCATO CON 588 (CONT.) -->
+            <div class="page locked-page" id="page-7">
+                <div class="locked-content">
+                    <div class="lock-icon">🔐</div>
+                    <h2>Sezione Bloccata</h2>
+                </div>
+                <div class="unlocked-content" style="display: none;">
+                    <h2>Giovedì 6 Novembre.</h2>
+                    <p>Oggi ho ricevuto una visita in ufficio.</p>
+                    <p>Il presidente della fondazione, il signor De Rossi in persona, si è presentato da me.</p>
+                    <p>Vezzosi gli aveva riferito della mia scoperta, anche se aveva acconsentito a non dire in giro della cosa. Il signor De Rossi è stato garbato al principio, facendomi molti elogi per il mio modo di lavorare e per la mia professionalità.</p>
+                    <p>Poi mi ha detto che per chi si dimostra disponibile a tutelare certi interessi, con un curriculum come il mio, potrebbero esserci offerte lavorative ben retribuite. E ha parlato di cifre che farebbero impallidire ogni ricercatore.</p>
+                    <div class="page-number">7</div>
+                </div>
+            </div>
+
+            <!-- PAGINA 8: TESTO BLOCCATO CON 588 (CONT.) -->
+            <div class="page locked-page" id="page-8">
+                <div class="locked-content">
+                    <div class="lock-icon">🔐</div>
+                    <h2>Sezione Bloccata</h2>
+                </div>
+                <div class="unlocked-content" style="display: none;">
+                    <p>A quel punto i suoi discorsi si sono fatti più strani. Ha parlato della necessità di fidarsi e di poter chiedere cortesie, come si fa tra amici, o tra persone che si rispettano "grandemente".</p>
+                    <p>Ero troppo stupito per altro che una richiesta di chiarezza.</p>
+                    <p>Ed è stato chiaro. Vorrebbe che gli consegnassi i documenti e che non ne facessi parola con nessuno, in cambio di un lavoro che mi assicurerà la vecchiaia e mi concederà di poter fare una bella vita senza preoccupazioni.</p>
+                    <p>Ero indignato e glielo ho detto.</p>
+                    <p>Lui non ha aggiunto altro.</p>
+                    <p>Se ne è andata in silenzio, ma si vedeva che era arrabbiato per la mia risposta.</p>
+                    <div class="page-number">8</div>
+                </div>
+            </div>
+
+            <!-- PAGINA 9: TESTO BLOCCATO CON 588 (CONT.) -->
+            <div class="page locked-page" id="page-9">
+                <div class="locked-content">
+                    <div class="lock-icon">🔐</div>
+                    <h2>Sezione Bloccata</h2>
+                </div>
+                <div class="unlocked-content" style="display: none;">
+                    <h2>Mercoledì 12 Novembre.</h2>
+                    <p>Mentre uscivo dagli uffici sono stato avvicinato da due uomini.</p>
+                    <p>Prima che salissi sulla mia macchina mi hanno afferrato e picchiato. Mi hanno portato via la cartellina e anche una scatola di documenti che stava sul sedile posteriore della macchina.</p>
+                    <p>Poi mi hanno detto che se io non volevo tornassero, potevo consegnare ogni altro documento al gentiluomo che già mi aveva fatto visita.</p>
+                    <p>Uno dei due mi ha anche mostrato un distintivo da poliziotto, chiarendomi che non mi conveniva fare lo stronzo… perché sarebbe venuto lui a redigere il verbale, se avessi voluto sporgere denuncia.</p>
+                    <div class="page-number">9</div>
+                </div>
+            </div>
+
+            <!-- PAGINA 10: TESTO BLOCCATO CON 588 (CONT.) -->
+            <div class="page locked-page" id="page-10">
+                <div class="locked-content">
+                    <div class="lock-icon">🔐</div>
+                    <h2>Sezione Bloccata</h2>
+                </div>
+                <div class="unlocked-content" style="display: none;">
+                    <p>Quando se ne sono andati sono salito in auto e sono andato di volata a casa. Mi sono chiuso la porta alle spalle e ho guardato i documenti, sul tavolo del cucinino, dicendomi che dovevo nasconderli… per cui l'ho fatto subito, anche se non al sicuro come vorrei. Stanotte non riuscirò a dormire, lo so.</p>
+                    <p>Sono nei guai. In grossi guai.</p>
+                    <p>Se De Rossi è disposto ad arrivare a questo punto per quelle carte, la cosa deve avere ben più ricadute di quante immaginavo; eppure non intendo lasciarglieli. Io non sono disposto a sacrificare la verità… non riuscirei più a guardarmi allo specchio la mattina, altrimenti.</p>
+                    <p>Ma sono certo di non poter neppure tornare a far finta di nulla.</p>
+                    <div class="handwritten-note">Tra le lettere della vostra mappa ve n'è una in cui ho lasciato l'ultimo dei frammenti da scoprire; si tratta, invero, dell'anno di una certa data.</div>
+                    <div class="page-number">10</div>
+                </div>
+            </div>
+
+            <!-- PAGINA 11: TESTO SBLOCCATO - 15 NOVEMBRE -->
+            <div class="page">
+                <h2>Venerdì 15 Novembre.</h2>
+                <p>Palazzo dei Vescovi.</p>
+                <p>Forse non dovrei scrivere, non qui e certamente non in questo momento, ma il silenzio di queste mura mi pesa addosso molto più della paura stessa; è un silenzio innaturale, simile a quello di chi trattiene il respiro per evitare di essere scoperto.</p>
+                <p>Sono venuto a Palazzo dei Vescovi cercando coerenza, l'unica moneta che noi archeologi inseguiamo davvero tra le macerie, perché la storia ufficiale della città somiglia a un abito cerimoniale troppo stretto, cucito per nascondere le ferite e le cuciture malfatte dei secoli. Ho trascorso ore nei sotterranei, scivolando tra le stratificazioni che scendono fino al cuore etrusco di Pistoia, senza che l'infinita grandezza della storia portasse al mio cuore la pace come fa solitamente.</p>
+                <div class="page-number">11</div>
+            </div>
+
+            <!-- PAGINA 12: 15 NOVEMBRE (CONT.) -->
+            <div class="page">
+                <p>Allora sono salito fino all'arazzo Millefiori e mi sono seduto nel silenzio della sala vuota, lasciando che il mio sguardo si perdesse, nella speranza che la quiete tornasse.</p>
+                <p>Ma anche qui mi sono sentito solo braccato, come uno dei conigli intessuti nell'arazzo… spaventato e braccato, ma senza una tana in cui nascondermi.</p>
+                <p>Poi uno dei custodi è venuto ad avvisarmi per la chiusura ed io sono sobbalzato al suono della sua voce. Devo trovare una soluzione.</p>
+                <h2>Mercoledì 19 novembre.</h2>
+                <p>Ho trovato un biglietto quando sono tornato dalla pausa pranzo. Diceva solo "Possiamo aspettare, ma solo per poco ancora. Il tuo silenzio non è molto gentile pertanto ci chiediamo che senso abbia che lo siamo noi."</p>
+                <div class="page-number">12</div>
+            </div>
+
+            <!-- PAGINA 13: 19 NOVEMBRE (CONT.) -->
+            <div class="page">
+                <p>Sono uscito da lavoro prima.</p>
+                <p>La porta di casa mia era aperta e le mie cose sparse in giro. Avevano cercato.</p>
+                <p>Mi sono sentito male e sono uscito per una passeggiata in centro.</p>
+                <p>Le teste in giro per la città, sui monumenti e sulle chiese, parevano guardarmi. Sono finito vicino alle poste… un palazzo di epoca fascista… sul retro c'era una statua che avevo visto come calco al museo De Rossi. Mentre c'era chi accumulava oro, la città soffriva. Così mi sono fermato davanti agli "Scioperanti" di Andrea Lippi. È un'opera omerica, tragica: un uomo che ne porta un altro sulle spalle, un peso che non è solo carne, ma il simbolo di una Pistoia piegata dalla fame e dai debiti. In questo gesso del 1913 c'è più verità che in tutti i fregi dorati dei palazzi nobiliari. Si sente il contrasto violento con il dinamismo futurista di Nannini: da una parte la realtà nuda, dall'altra la maschera del progresso che i padroni volevano imporre.</p>
+                <div class="page-number">13</div>
+            </div>
+
+            <!-- PAGINA 14: 19 NOVEMBRE (CONT.) -->
+            <div class="page">
+                <p>La maschera contro la verità.</p>
+                <p>Voglio anch'io arrendermi? Mettermi la maschera e cedere alla paura del dolore?</p>
+                <p>Non lo so. Non ho questa risposta. Non mi considero un uomo coraggioso, ma solo uno che vuol fare bene il suo lavoro.</p>
+                <h2>Domenica 23 Novembre.</h2>
+                <p>Ho preso una decisione. Non cederò alle minacce.</p>
+                <p>Ho iniziato ad elaborare un piano. Domani scriverò ai giornali locali. Ad un mese da oggi la verità sarà chiara a tutti e questo clima di terrore finirà.</p>
+                <div class="page-number">14</div>
+            </div>
+
+            <!-- PAGINA 15: 27 NOVEMBRE - TESTO SBLOCCATO -->
+            <div class="page">
+                <h2>Venerdì 27 Novembre.</h2>
+                <p>Oggi camminavo per il centro di Pistoia.</p>
+                <p>Un uomo ha fatto per avvicinarmi. Somigliava a quello che mi ha aspettato vicino all'auto, quel giorno; io ho gridato terrorizzato e mentre scappavo l'ho sentito urlare che voleva soltanto sapere che ore fossero.</p>
+                <p>Ma ormai era tardi.</p>
+                <p>Il terrore aveva avuto la meglio e mi sembrava che ogni persona che incrociavo mi stesse guardando.</p>
+                <p>Così sono corso a rintanarmi nel piazzale di Palazzo De' Rossi e poi nel museo. E' stato come addentrarsi in una tana di lupi vestiti di seta. Qui la magnificenza non è un semplice fregio, ma una clava usata per stordire il visitatore; gli affreschi non raccontano una storia, ma la impongono brutalmente, schiacciandoci sotto il peso di una nobiltà che si pretende divina.</p>
+                <div class="page-number">15</div>
+            </div>
+
+            <!-- PAGINA 16: 27 NOVEMBRE (CONT.) - BLOCCATO CON 000 -->
+            <div class="page locked-page" id="page-16">
+                <div class="locked-content">
+                    <div class="lock-icon">🔐</div>
+                    <h2>Sezione Segreta</h2>
+                    <p>Continua il resoconto di ciò che accadde...</p>
+                    <a href="#" class="qr-link" onclick="openUnlock(event, '16')">Inserisci il Codice</a>
+                </div>
+                <div class="unlocked-content" style="display: none;">
+                    <p>Poi, quando sono entrato, era come se l'aria dentro fosse diversa, più rarefatta, carica di un'eleganza che sembra voler nascondere qualcosa di torbido. Appena varcata la soglia, mi sono sentito osservato: non dai custodi, ma da quegli omini in rosso di Roberto Barni. Sembrano sentinelle immobili, testimoni di un segreto che non possono pronunciare. Mi chiedo se siano lì per dare il benvenuto o per contare quanti, come me, osano avventurarsi oltre il confine della versione ufficiale. Sono il primo monito: in questa casa, anche l'arte ha occhi che ti seguono.</p>
+                    <p>Mi sentivo sempre più soffocare.</p>
+                    <p>Braccato, nonostante le decisioni prese, al pensiero che alla fine decideranno di zittire quanto potrei dire e che faranno scomparire i documenti che ho trovato.</p>
+                    <div class="page-number">16</div>
+                </div>
+            </div>
+
+            <!-- PAGINA 17: 27 NOVEMBRE (CONT.) - BLOCCATO CON 000 -->
+            <div class="page locked-page" id="page-17">
+                <div class="locked-content">
+                    <div class="lock-icon">🔐</div>
+                    <h2>Sezione Segreta</h2>
+                </div>
+                <div class="unlocked-content" style="display: none;">
+                    <p>Ad un certo punto sono arrivato davanti ai Giocolieri di Marino Marini. Sono lì, in bilico, fragili eppure eterni. Mi ricordano la posizione in cui mi trovo io: un solo passo falso e tutto crollerà. Marini ha scolpito queste figure in anni diversi, eppure sembrano cercare la stessa identica stabilità che i De Rossi hanno cercato di comprare con l'usura. C'è una differenza sottile tra il primo e il secondo giocoliere, un'evoluzione nel dolore e nella consapevolezza. Ho annotato le date; è nel tempo che si nasconde l'inganno.</p>
+                    <p>Così alla fine sono uscito, osservando la statua di Grandonio.</p>
+                    <p>Grandonio non è mai stato un eroe templare, è stata solo la loro più grande invenzione pubblicitaria per coprire i veri "tesori" accumulati tra queste mura. Nascosti dietro nomi di prestanome e confraternite, da qualche parte potrebbero esserci anche i registri della loro ascesa violenta fatta di strozzinaggio, usura metodica ed espropri di terre ai danni di famiglie ridotte alla fame da tassi d'interesse brutali.</p>
+                    <div class="page-number">17</div>
+                </div>
+            </div>
+
+            <!-- PAGINA 18: 27 NOVEMBRE (CONT.) - BLOCCATO CON 000 -->
+            <div class="page locked-page" id="page-18">
+                <div class="locked-content">
+                    <div class="lock-icon">🔐</div>
+                    <h2>Sezione Segreta</h2>
+                </div>
+                <div class="unlocked-content" style="display: none;">
+                    <p>Grandonio è la maschera d'oro messa sul volto di un esattore spietato che ha comprato il silenzio della Chiesa e finanziato i muri di San Salvatore solo per lavarsi la coscienza, costruendo questo Palazzo come un monumento alla propria impunità.</p>
+                    <p>Mi seguono apertamente ormai e sento il rumore di un motore acceso poco più in là; non hanno fretta perché sanno che non ho più posti dove scappare.</p>
+                    <p>Ma ho deciso: tra pochi giorni invierò questo diario e copia delle mie ricerche ad una persona di fiducia, seminando altrove i miei appunti e i miei sospetti: se mi toglieranno di mezzo non potranno comunque fermare la Verità, che come l'acqua trova sempre una crepa per uscire.</p>
+                    <p>Scrivo questo messaggio per te, per quando riceverai questo scritto. Ricordatelo sempre, vecchia amica: la nobiltà non è che un debito che nessuno ha mai avuto il coraggio di riscuotere.</p>
+                    <div class="handwritten-note">Quel luogo è la casa di molti solidi chiusi, che se aperti rivelano interi mondi.</div>
+                    <div class="page-number">18</div>
+                </div>
+            </div>
+
+            <!-- PAGINA 19: 3 DICEMBRE - TESTO SBLOCCATO -->
+            <div class="page">
+                <h2>Mercoledì 3 Dicembre.</h2>
+                <p>Ho stilato una serie di idee per nascondere le mie annotazioni ed i documenti, disseminandoli per i musei e per le vie di Pistoia.</p>
+                <p>Invierò a te, Agatha questi appunti assieme al diario perché possa farne buon uso, nel caso io decida di nascondere le prove.</p>
+                <p>Tu potrai ritrovarle se io non avrò avuto successo e decidere come far sì che la verità venga a galla.</p>
+                <p>Mi accorgo ora che, avendo deciso di inviarti il diario, non sto più scrivendo per me stesso. Ora scrivo per te, amica mia, perché il timore di non riuscire a portare a termine il mio lavoro è forte, ma so anche che tu hai la furbizia che a me manca e che potresti riuscire laddove io invece dovessi fallire.</p>
+                <div class="page-number">19</div>
+            </div>
+
+            <!-- PAGINA 20: 11 DICEMBRE -->
+            <div class="page">
+                <h2>Giovedì 11 Dicembre.</h2>
+                <p>Ho nascosto il diario, gli appunti, la copia dei documenti e dei miei studi… Spero non serva, ma in caso, sii la mia ultima speranza.</p>
+                <h2>Mercoledì 17 Dicembre.</h2>
+                <p>Ora che tutto è stato ben nascosto, mi sento meglio.</p>
+                <p>Ora mi concentro solo sul preparare la conferenza stampa, fissata ormai per il 23 Dicembre. Ho ripetuto il discorso e mi sono preparato per le domande.</p>
+                <p>Non esco quasi più, se non per la spesa e per il lavoro.</p>
+                <div class="page-number">20</div>
+            </div>
+
+            <!-- PAGINA 21: 17 DICEMBRE (CONT.) -->
+            <div class="page">
+                <p>E cerco sempre di non farmi trovare solo…</p>
+                <p>Ieri sono stato alla chiesetta di San Salvatore, durante il lavoro, in un orario in cui ci fosse qualcuno.</p>
+                <p>Se c'è una cosa che ho imparato scavando è che la terra non mente mai, a differenza degli uomini che hanno trasformato la menzogna in una delle più sottili belle arti. Qui, nel Museo di San Salvatore, mi sento al sicuro e al contempo profondamente in trappola, circondato da una chiesa che è stata spogliata e rivelata come un corpo sezionato che mostra i suoi visceri di pietra.</p>
+                <p>Mentre risalivo le scale ho udito dei passi leggeri e ritmici; ho finto di osservare un capitello fermandomi di colpo e anche i passi si sono arrestati insieme a me. Ho cambiato direzione verso l'uscita laterale e loro hanno fatto lo stesso, con una logica spietata che non lascia spazio alla paranoia: se qualcuno si cura di seguirmi in un museo non deserto, significa che i miei occhi hanno visto ciò che doveva restare sepolto sotto tre metri di terra.</p>
+                <div class="page-number">21</div>
+            </div>
+
+            <!-- PAGINA 22: 17 DICEMBRE (CONT.) -->
+            <div class="page">
+                <p>Allora ho preso a correre, incurante degli sguardi e delle parole della gente.</p>
+                <p>Quando sono rientrato agli uffici una delle ragazze mi ha chiamato. "Signor Philippe De Rouge, c'è un pacco per lei!"</p>
+                <p>Sono andato a prenderlo e scommetto che la povera ragazza avrà scambiato il mio sguardo terrorizzato con quello di un folle, dopo avermi visto arrivare trafelato e di corsa.</p>
+                <p>Ho aperto il pacco e c'era il contratto per il lavoro che mi era stato offerto, nero su bianco.</p>
+                <p>E un biglietto.</p>
+                <p>"Ancora per tre giorni, a vostra disposizione, se ritirate la conferenza. Altrimenti ritireremo noi l'offerta, con quel che ne consegue."</p>
+                <p>Ho iniziato a tremare.</p>
+                <p>Sono certo la ragazza fosse preoccupata. Poi sono andato di corsa a casa.</p>
+                <div class="page-number">22</div>
+            </div>
+
+            <!-- PAGINA 23: 18 DICEMBRE - TESTO BLOCCATO CON FACE -->
+            <div class="page locked-page" id="page-23">
+                <div class="locked-content">
+                    <div class="lock-icon">🔐</div>
+                    <h2>La Verità Conclusiva</h2>
+                    <p>Qui risiede il capitolo finale del diario di Philippe De Rouge.</p>
+                    <a href="#" class="qr-link" onclick="openUnlock(event, '23')">Inserisci il Codice</a>
+                </div>
+                <div class="unlocked-content" style="display: none;">
+                    <h2>Giovedì 18 Dicembre.</h2>
+                    <p>Questa è senza dubbio l'ultima annotazione che inserisco Agatha.</p>
+                    <p>Troverai in una lettera a parte i dati dello studio approfondito su come ho nascosto per i musei tutto quello che ti servirà e le annotazioni su come potrai entrare senza essere vista, ma spero che una volta memorizzata la lettera in questione tu voglia farla sparire, prima di venire a Pistoia per recuperare i documenti. Non sia mai cada in mani sbagliate.</p>
+                    <p>Oltre a questo ti lascio quest'ultimo messaggio.</p>
+                    <p>Quando ho capito che questo ramo criminoso della mia stessa famiglia non era affatto cambiato negli ultimi circa mille anni, non volevo crederlo.</p>
+                    <p>Ma non c'è molta differenza tra ciò che erano (briganti) e quello che sono oggi.</p>
+                    <p>Potranno essersi rivestiti di una patina dorata, ma sotto emerge ancora il marcio di cui non si sono disfatti con cambi di nome, crociate da schiavisti e chi più ne ha più ne metta.</p>
+                    <div class="page-number">23</div>
+                </div>
+            </div>
+
+            <!-- PAGINA 24: 18 DICEMBRE (CONT.) - TESTO BLOCCATO CON FACE -->
+            <div class="page locked-page" id="page-24">
+                <div class="locked-content">
+                    <div class="lock-icon">🔐</div>
+                    <h2>La Verità Conclusiva</h2>
+                </div>
+                <div class="unlocked-content" style="display: none;">
+                    <p>Per loro il fine giusticava l'abbietto mezzo allora e così fa oggi.</p>
+                    <p>Tra pochi giorni sputerò sulla loro grandezza, sulle origini altisonanti e chissà su cos'altro.</p>
+                    <p>Se riuscirò a giungere alla conferenza spiegherò tutto e andrò con i giornalisti a recuperare i documenti nascosti, in modo che tutto torni alla luce.</p>
+                    <p>Ma invio ogni cosa anche a te, amica mia.</p>
+                    <p>Perchè temo che quel giorno non potrà vedermi nei panni di eroe, ma in quelli di vittima. Temo mi faranno sparire.</p>
+                    <p>Se così sarà stato, fa in modo che non sia stato invano, questo ti chiedo.</p>
+                    <p>Trova un modo perché la verità non possa essere nascosta di nuovo.</p>
+                    <p>Un abbraccio fraterno,</p>
+                    <div class="signature">Philippe De Rouge</div>
+                    <div class="handwritten-note">A voi non serve forzare le sue armate porte, ma solo rintracciare l'anno romano, bianco su nero.</div>
+                    <div class="page-number">24</div>
+                </div>
             </div>
         </div>
 
@@ -634,7 +807,6 @@
         let curPage = 0;
         const totalPages = document.querySelectorAll('.page').length;
         
-        // Calcola quante pagine mostrare per view (1 su mobile, 2 su desktop)
         function getPagesPerView() {
             return window.innerWidth > 768 ? 2 : 1;
         }
@@ -644,26 +816,26 @@
             return Math.ceil(totalPages / pagesPerView);
         }
 
-        // Verifica e applica gli sblocchi delle pagine
         function checkAndApplyUnlocks() {
-            for (let pageNum of [2, 4, 6]) {
-                const storedData = localStorage.getItem(`page${pageNum}_unlocked`);
+            const pagesToCheck = [5, 6, 7, 8, 9, 10, 16, 17, 18, 23, 24];
+            
+            for (let i = 0; i < pagesToCheck.length; i++) {
+                const pageNum = pagesToCheck[i];
+                const key = 'page' + pageNum + '_unlocked';
+                const storedData = localStorage.getItem(key);
                 
                 if (storedData) {
                     try {
                         const data = JSON.parse(storedData);
                         const now = Date.now();
                         
-                        // Verifica se il token è scaduto (24 ore)
                         if (data.expiry && now > data.expiry) {
-                            // Token scaduto, rimuovilo
-                            localStorage.removeItem(`page${pageNum}_unlocked`);
+                            localStorage.removeItem(key);
                             continue;
                         }
                         
-                        // Token valido
                         if (data.unlocked) {
-                            const pageElement = document.getElementById(`page-${pageNum}`);
+                            const pageElement = document.getElementById('page-' + pageNum);
                             
                             if (pageElement) {
                                 const lockedContent = pageElement.querySelector('.locked-content');
@@ -675,8 +847,8 @@
                             }
                         }
                     } catch (e) {
-                        // Se c'è un errore nel parsing, rimuovi il dato corrotto
-                        localStorage.removeItem(`page${pageNum}_unlocked`);
+                        console.error('Error parsing unlock data:', e);
+                        localStorage.removeItem(key);
                     }
                 }
             }
@@ -711,25 +883,20 @@
             window.location.href = `unlock.html?page=${pageNum}`;
         }
 
-        // Inizializza all'apertura
         checkAndApplyUnlocks();
         
-        // Verifica se c'è un hash per la navigazione (da unlock.html)
         const hash = window.location.hash;
         const viewParam = new URLSearchParams(hash.slice(1)).get('view');
         const initialView = viewParam ? parseInt(viewParam) : 0;
         
         showPage(initialView);
 
-        // Verifica periodicamente i cambiamenti (utile se cambiano altri tab)
         setInterval(checkAndApplyUnlocks, 500);
 
-        // Gestisci il resize della finestra
         window.addEventListener('resize', () => {
             showPage(curPage);
         });
 
-        // Touch swipe per mobile
         let touchStartX = 0;
         let touchEndX = 0;
 
@@ -748,10 +915,8 @@
 
             if (Math.abs(diff) > swipeThreshold) {
                 if (diff > 0) {
-                    // Swipe sinistra = pagina successiva
                     nextPage();
                 } else {
-                    // Swipe destra = pagina precedente
                     previousPage();
                 }
             }
