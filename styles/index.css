@@ -1,3 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
+/* ============================================
+   VARIABILI GLOBALI
+   ============================================ */
+:root {
+  /* Colori */
+  --color-primary: #d4af37;
+  --color-primary-hover: #e8c547;
+  --color-dark: #2d1810;
+  --color-text: #3d3d3d;
+  --color-page-bg: #f5f1e8;
+  --color-page-mid: #e8dcc4;
+  --color-page-dark: #ddd0c1;
+  --color-locked-bg-start: #5a4a3a;
+  --color-locked-bg-end: #4a3a2a;
+  --color-border: #8b4513;
+  --color-border-light: rgba(139, 69, 19, 0.1);
+  --color-border-border: #8b7355;
+  --color-accent-blue: #1e5f99;
+  --color-light-text: #e8dcc4;
+  --color-gold-light: #d4af37;
+  --color-bg-dark: #2a2a1f;
+  --color-bg-control: #3d3d30;
+  
+  /* Font */
+  --font-typewriter: 'Tox Typewriter', monospace;
+  --font-handwrite: 'Great Vibes', cursive;
+  
+  /* Spacing */
+  --spacing-xs: 15px;
+  --spacing-sm: 20px;
+  --spacing-md: 30px;
+  --spacing-lg: 40px;
+  --spacing-xl: 60px;
+  
+  /* Padding */
+  --padding-page: 60px 80px;
+  --padding-page-sm: 40px 20px;
+  --padding-page-xs: 25px 15px;
+  
+  /* Shadow */
+  --shadow-page: 
+    inset -15px 0 30px rgba(0, 0, 0, 0.15), 
+    inset 0 0 40px rgba(0, 0, 0, 0.05),
+    15px 0 30px rgba(0, 0, 0, 0.3);
+  --shadow-page-locked: 
+    inset -15px 0 30px rgba(0, 0, 0, 0.3),
+    inset 0 0 40px rgba(0, 0, 0, 0.2),
+    15px 0 30px rgba(0, 0, 0, 0.4);
+  --shadow-button: 2px 2px 6px rgba(0, 0, 0, 0.3);
+  --shadow-button-hover: 5px 5px 12px rgba(0, 0, 0, 0.4);
+  --shadow-control: 0 8px 20px rgba(0, 0, 0, 0.5);
+  
+  /* Gradienti */
+  --gradient-striped: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 2px,
+    rgba(139, 69, 19, 0.02) 2px,
+    rgba(139, 69, 19, 0.02) 4px
+  );
+  --gradient-striped-dark: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+  --gradient-page: linear-gradient(180deg, var(--color-page-bg) 0%, var(--color-page-mid) 50%, var(--color-page-dark) 100%);
+  --gradient-cover: linear-gradient(135deg, #d4af37 0%, #c9a227 50%, var(--color-page-mid) 100%);
+  --gradient-locked: linear-gradient(135deg, var(--color-locked-bg-start) 0%, var(--color-locked-bg-end) 100%);
+  
+  /* Transitions */
+  --transition-smooth: all 0.3s ease;
+}
+
 @font-face {
     font-family: 'Tox Typewriter';
     src: url('../fonts/Tox Typewriter.ttf') format('truetype');
@@ -5,6 +82,9 @@
     font-style: normal;
 }
 
+/* ============================================
+   RESET & BASE
+   ============================================ */
 * {
     margin: 0;
     padding: 0;
@@ -19,19 +99,22 @@ html, body {
 
 body {
     background: #2a2a1f url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect fill="%232a2a1f" width="100" height="100"/><circle cx="10" cy="10" r="1" fill="%23000" opacity="0.05"/></svg>');
-    font-family: 'Tox Typewriter', monospace;
-    color: #3d3d3d;
+    font-family: var(--font-typewriter);
+    color: var(--color-text);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
+/* ============================================
+   LAYOUT PRINCIPALE
+   ============================================ */
 .book-container {
     width: 100vw;
     height: 100vh;
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    background: #2a2a1f;
+    background: var(--color-bg-dark);
 }
 
 .pages-wrapper {
@@ -51,45 +134,37 @@ body {
     top: 0;
     width: 3px;
     height: 100%;
-    background: linear-gradient(to bottom, transparent 0%, #8b4513 10%, #8b4513 90%, transparent 100%);
+    background: linear-gradient(to bottom, transparent 0%, var(--color-border) 10%, var(--color-border) 90%, transparent 100%);
     z-index: 50;
     transform: translateX(-50%);
     box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.4);
 }
 
+/* ============================================
+   PAGINE
+   ============================================ */
 .page {
     flex: 0 0 50vw;
     width: 50vw;
     height: 100%;
-    background: 
-        repeating-linear-gradient(
-            90deg,
-            transparent,
-            transparent 2px,
-            rgba(139, 69, 19, 0.02) 2px,
-            rgba(139, 69, 19, 0.02) 4px
-        ),
-        linear-gradient(180deg, #f5f1e8 0%, #e8dcc4 50%, #ddd0c1 100%);
-    padding: 60px 80px;
+    background: var(--gradient-striped), var(--gradient-page);
+    padding: var(--padding-page);
     overflow-y: auto;
-    color: #3d3d3d;
+    color: var(--color-text);
     position: relative;
-    box-shadow: 
-        inset -15px 0 30px rgba(0, 0, 0, 0.15), 
-        inset 0 0 40px rgba(0, 0, 0, 0.05),
-        15px 0 30px rgba(0, 0, 0, 0.3);
-    border-right: 1px solid rgba(139, 69, 19, 0.1);
+    box-shadow: var(--shadow-page);
+    border-right: 1px solid var(--color-border-light);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
 }
 
 .page:nth-child(odd) {
-    border-right: 1px solid rgba(139, 69, 19, 0.1);
+    border-right: 1px solid var(--color-border-light);
 }
 
 .page:nth-child(even) {
-    border-left: 1px solid rgba(139, 69, 19, 0.1);
+    border-left: 1px solid var(--color-border-light);
 }
 
 .page::before {
@@ -121,15 +196,7 @@ body {
 }
 
 .page.page-1 {
-    background: 
-        repeating-linear-gradient(
-            90deg,
-            transparent,
-            transparent 2px,
-            rgba(139, 69, 19, 0.02) 2px,
-            rgba(139, 69, 19, 0.02) 4px
-        ),
-        linear-gradient(135deg, #d4af37 0%, #c9a227 50%, #e8dcc4 100%);
+    background: var(--gradient-striped), var(--gradient-cover);
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -140,30 +207,32 @@ body {
     bottom: 30px;
     right: 40px;
     color: #81694b;
-    font-size: 1.1em;
-    font-family: 'Tox Typewriter', monospace;
-    opacity: 0.6;
+    font-size: 1.5em;
+    font-family: var(--font-typewriter);
 }
 
+/* ============================================
+   TIPOGRAFIA
+   ============================================ */
 h1 {
-    font-family: 'Tox Typewriter', monospace;
+    font-family: var(--font-typewriter);
     font-size: 2.8em;
     font-weight: 700;
-    color: #2d1810;
-    margin-bottom: 20px;
+    color: var(--color-dark);
+    margin-bottom: var(--spacing-sm);
     text-align: center;
     letter-spacing: 0.15em;
 }
 
 h2 {
-    font-family: 'Tox Typewriter', monospace;
+    font-family: var(--font-typewriter);
     font-size: 1.35em;
     font-weight: bold;
-    color: #2d1810;
-    margin-bottom: 15px;
-    margin-top: 20px;
+    color: var(--color-dark);
+    margin-bottom: var(--spacing-xs);
+    margin-top: var(--spacing-sm);
     padding-bottom: 8px;
-    border-bottom: 1px dashed #8b4513;
+    border-bottom: 1px dashed var(--color-border);
     letter-spacing: 0.08em;
 }
 
@@ -174,52 +243,39 @@ h2:first-child {
 p {
     font-size: 1.15em;
     line-height: 1.85;
-    margin-bottom: 15px;
+    margin-bottom: var(--spacing-xs);
     text-align: left;
-    color: #3d3d3d;
-    font-family: 'Tox Typewriter', monospace;
+    color: var(--color-text);
+    font-family: var(--font-typewriter);
     letter-spacing: 0.04em;
 }
 
 .subtitle {
-    text-align: center;
-    color: #8b4513;
+    color: var(--color-border);
     font-size: 1.5em;
     font-style: italic;
-    margin-bottom: 30px;
-    font-family: 'Tox Typewriter', monospace;
+    font-family: var(--font-typewriter);
     letter-spacing: 0.05em;
 }
 
 .decorator {
-    text-align: center;
     font-size: 1.2em;
-    color: #8b4513;
-    margin: 20px 0;
-    opacity: 0.7;
+    color: var(--color-border);
     letter-spacing: 8px;
 }
 
+/* ============================================
+   PAGINE BLOCCATE
+   ============================================ */
 .locked-page {
     display: flex !important;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    background: 
-        repeating-linear-gradient(
-            90deg,
-            transparent,
-            transparent 2px,
-            rgba(0, 0, 0, 0.03) 2px,
-            rgba(0, 0, 0, 0.03) 4px
-        ),
-        linear-gradient(135deg, #5a4a3a 0%, #4a3a2a 100%) !important;
-    color: #e8dcc4;
-    box-shadow: 
-        inset -15px 0 30px rgba(0, 0, 0, 0.3),
-        inset 0 0 40px rgba(0, 0, 0, 0.2),
-        15px 0 30px rgba(0, 0, 0, 0.4) !important;
+    background: var(--gradient-striped-dark), var(--gradient-locked) !important;
+    color: var(--color-light-text);
+    box-shadow: var(--shadow-page-locked) !important;
 }
 
 .locked-content {
@@ -231,6 +287,39 @@ p {
     width: 100%;
 }
 
+.lock-icon {
+    font-size: 6em;
+    margin-bottom: var(--spacing-md);
+    opacity: 0.8;
+}
+
+.locked-page h2 {
+    color: var(--color-gold-light);
+    border-color: var(--color-border-border);
+    font-size: 1.3em;
+}
+
+.locked-page p {
+    color: var(--color-light-text);
+    font-size: 1.05em;
+    max-width: 80%;
+}
+
+/* ============================================
+   PAGINE SBLOCCATE (PAGINE BLOCCATE APERTE)
+   ============================================ */
+.locked-page.unlocked-display {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    align-items: stretch !important;
+    background: var(--gradient-striped), var(--gradient-page) !important;
+    color: var(--color-text) !important;
+    text-align: left !important;
+    box-shadow: var(--shadow-page) !important;
+    overflow-y: auto !important;
+}
+
 .locked-page.unlocked-display .unlocked-content {
     display: block !important;
     width: 100%;
@@ -240,143 +329,66 @@ p {
 .locked-page.unlocked-display p {
     font-size: 0.95em !important;
     line-height: 1.8 !important;
-    color: #3d3d3d !important;
-    margin-bottom: 15px;
+    color: var(--color-text) !important;
+    margin-bottom: var(--spacing-xs);
     max-width: 100% !important;
 }
 
 .locked-page.unlocked-display h2 {
-    font-size: 1.1em !important;
-    color: #2d1810 !important;
-    border-color: #8b4513 !important;
-    margin-top: 20px;
-    margin-bottom: 15px;
-}
-
-.locked-page.unlocked-display {
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: flex-start !important;
-    align-items: stretch !important;
-    background: 
-        repeating-linear-gradient(
-            90deg,
-            transparent,
-            transparent 2px,
-            rgba(139, 69, 19, 0.02) 2px,
-            rgba(139, 69, 19, 0.02) 4px
-        ),
-        linear-gradient(180deg, #f5f1e8 0%, #e8dcc4 50%, #ddd0c1 100%) !important;
-    color: #3d3d3d !important;
-    text-align: left !important;
-    box-shadow: 
-        inset -15px 0 30px rgba(0, 0, 0, 0.15), 
-        inset 0 0 40px rgba(0, 0, 0, 0.05),
-        15px 0 30px rgba(0, 0, 0, 0.3) !important;
-    overflow-y: auto !important;
+    font-size: 1.2em !important;
+    color: var(--color-dark) !important;
+    border-color: var(--color-border) !important;
+    margin-bottom: var(--spacing-xs);
 }
 
 .locked-page.unlocked-display .handwritten-note {
     margin-top: auto;
 }
 
-.lock-icon {
-    font-size: 6em;
-    margin-bottom: 30px;
-    opacity: 0.8;
-}
-
-.locked-page h2 {
-    color: #d4af37;
-    border-color: #8b7355;
-    font-size: 1.3em;
-}
-
-.locked-page p {
-    color: #e8dcc4;
-    font-size: 1.05em;
-    max-width: 80%;
-}
-
+/* ============================================
+   ELEMENTI INTERATTIVI
+   ============================================ */
 .qr-link {
-    margin-top: 40px;
     padding: 16px 40px;
-    background: #d4af37;
-    border: 2px solid #8b7355;
+    background: var(--color-primary);
+    border: 2px solid var(--color-border-border);
     border-radius: 0;
     cursor: pointer;
     text-decoration: none;
-    color: #2d1810;
+    color: var(--color-dark);
     font-size: 1.2em;
     font-weight: bold;
-    font-family: 'Tox Typewriter', monospace;
-    display: inline-block;
-    transition: all 0.3s ease;
+    font-family: var(--font-typewriter);
+    transition: var(--transition-smooth);
     letter-spacing: 1.2px;
-    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadow-button);
 }
 
 .qr-link:hover {
-    background: #e8c547;
+    background: var(--color-primary-hover);
     transform: translateY(-2px);
-    box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.4);
-}
-
-.handwritten-note {
-    font-family: 'Tox Typewriter', monospace;
-    color: #1e5f99;
-    font-size: 1.5em;
-    font-style: italic;
-    margin-top: 40px;
-    padding-top: 20px;
-    border-top: 1px dotted #8b4513;
-    line-height: 1.8;
-    text-align: center;
-    letter-spacing: 0.03em;
-}
-
-.signature {
-    font-family: 'Tox Typewriter', monospace;
-    font-size: 2.5em;
-    color: #2d1810;
-    text-align: right;
-    margin-top: 20px;
-    font-style: italic;
-}
-
-.controls {
-    position: fixed;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 20px;
-    z-index: 100;
-    background: #3d3d30;
-    padding: 20px 40px;
-    border: 2px solid #8b4513;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    box-shadow: var(--shadow-button-hover);
 }
 
 button {
     padding: 12px 28px;
-    background: #d4af37;
-    color: #2d1810;
-    border: 2px solid #8b7355;
+    background: var(--color-primary);
+    color: var(--color-dark);
+    border: 2px solid var(--color-border-border);
     border-radius: 0;
     cursor: pointer;
     font-weight: bold;
-    font-family: 'Tox Typewriter', monospace;
+    font-family: var(--font-typewriter);
     font-size: 1.15em;
-    transition: all 0.3s ease;
+    transition: var(--transition-smooth);
     letter-spacing: 0.8px;
-    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadow-button);
 }
 
 button:hover:not(:disabled) {
-    background: #e8c547;
+    background: var(--color-primary-hover);
     transform: translateY(-2px);
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
+    box-shadow: var(--shadow-button-hover);
 }
 
 button:active:not(:disabled) {
@@ -389,27 +401,155 @@ button:disabled {
     cursor: not-allowed;
 }
 
+/* ============================================
+   ELEMENTI AGGIUNTIVI
+   ============================================ */
+.handwritten-note {
+    font-family: var(--font-handwrite);
+    color: var(--color-accent-blue);
+    font-size: 2.8em;
+    font-style: normal;
+    margin-top: var(--spacing-lg);
+    padding-top: var(--spacing-sm);
+    border-top: 1px dotted var(--color-border);
+    line-height: 1.8;
+    letter-spacing: 0.03em;
+}
+
+.signature {
+    font-family: var(--font-handwrite);
+    font-size: 3.8em;
+    color: var(--color-dark);
+    font-style: normal;
+}
+
+.controls {
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: var(--spacing-sm);
+    z-index: 100;
+    background: var(--color-bg-control);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border: 2px solid var(--color-border);
+    box-shadow: var(--shadow-control);
+}
+
 .nav-arrow {
     display: none;
 }
 
+/* ============================================
+   SCROLLBAR
+   ============================================ */
 ::-webkit-scrollbar {
     width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-    background: #e8dcc4;
+    background: var(--color-page-mid);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #8b4513;
-    border: 2px solid #e8dcc4;
+    background: var(--color-border);
+    border: 2px solid var(--color-page-mid);
 }
 
 ::-webkit-scrollbar-thumb:hover {
     background: #6b3410;
 }
 
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+/* Spacing - Margin */
+.mt-xs { margin-top: var(--spacing-xs) !important; }
+.mt-sm { margin-top: var(--spacing-sm) !important; }
+.mt-md { margin-top: var(--spacing-md) !important; }
+.mt-lg { margin-top: var(--spacing-lg) !important; }
+.mt-xl { margin-top: var(--spacing-xl) !important; }
+.mt-0 { margin-top: 0 !important; }
+
+.mb-xs { margin-bottom: var(--spacing-xs) !important; }
+.mb-sm { margin-bottom: var(--spacing-sm) !important; }
+.mb-md { margin-bottom: var(--spacing-md) !important; }
+.mb-lg { margin-bottom: var(--spacing-lg) !important; }
+.mb-0 { margin-bottom: 0 !important; }
+
+.mx-auto { margin-left: auto; margin-right: auto; }
+
+/* Spacing - Padding */
+.p-sm { padding: var(--spacing-sm) !important; }
+.p-md { padding: var(--spacing-md) !important; }
+.p-lg { padding: var(--spacing-lg) !important; }
+
+.pt-sm { padding-top: var(--spacing-sm) !important; }
+.pt-md { padding-top: var(--spacing-md) !important; }
+.pb-sm { padding-bottom: var(--spacing-sm) !important; }
+.pb-md { padding-bottom: var(--spacing-md) !important; }
+
+/* Text Alignment */
+.text-center { text-align: center !important; }
+.text-left { text-align: left !important; }
+.text-right { text-align: right !important; }
+
+/* Font Styles */
+.font-italic { font-style: italic !important; }
+.font-bold { font-weight: bold !important; }
+.font-normal { font-weight: normal !important; }
+
+/* Display */
+.inline-block { display: inline-block !important; }
+.block { display: block !important; }
+.hidden { display: none !important; }
+
+/* Flex Utilities */
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Opacity */
+.opacity-60 { opacity: 0.6 !important; }
+.opacity-70 { opacity: 0.7 !important; }
+.opacity-80 { opacity: 0.8 !important; }
+
+/* Border */
+.border-top { border-top: 1px dashed var(--color-border) !important; }
+.border-bottom { border-bottom: 1px dashed var(--color-border) !important; }
+
+/* Color Utilities */
+.text-dark { color: var(--color-dark) !important; }
+.text-light { color: var(--color-light-text) !important; }
+.text-accent { color: var(--color-accent-blue) !important; }
+.text-border { color: var(--color-border) !important; }
+
+/* Position */
+.position-absolute { position: absolute !important; }
+.position-relative { position: relative !important; }
+
+/* Width & Height */
+.width-full { width: 100% !important; }
+.height-full { height: 100% !important; }
+
+/* ============================================
+   MEDIA QUERIES
+   ============================================ */
 @media (max-width: 1024px) {
     h1 {
         font-size: 1.5em !important;
@@ -425,7 +565,7 @@ button:disabled {
     }
 
     .page-number {
-        font-size: 0.9em !important;
+        font-size: 1.3em !important;
     }
 
     .lock-icon {
@@ -438,11 +578,11 @@ button:disabled {
     }
 
     .handwritten-note {
-        font-size: 1em !important;
+        font-size: 1.5em !important;
     }
 
     .signature {
-        font-size: 1.2em !important;
+        font-size: 2.3em !important;
     }
 
     button {
@@ -460,6 +600,10 @@ button:disabled {
 }
 
 @media (max-width: 768px) {
+    :root {
+        --padding-page: var(--padding-page-sm);
+    }
+
     .pages-wrapper {
         width: 2400vw !important;
     }
@@ -467,7 +611,6 @@ button:disabled {
     .page {
         flex: 0 0 100vw;
         width: 100vw;
-        padding: 40px 20px;
         overflow-y: auto;
     }
 
@@ -491,12 +634,12 @@ button:disabled {
     .page-number {
         bottom: 10px;
         right: 15px;
-        font-size: 1.2em;
+        font-size: 1.5em;
     }
 
     .lock-icon {
         font-size: 4em;
-        margin-bottom: 20px;
+        margin-bottom: var(--spacing-sm);
     }
 
     .qr-link {
@@ -505,17 +648,17 @@ button:disabled {
     }
 
     .handwritten-note {
-        font-size: 1.1em;
+        font-size: 1.6em;
     }
 
     .signature {
-        font-size: 2em;
+        font-size: 2.4em;
     }
 }
 
 @media (max-width: 480px) {
-    .page {
-        padding: 25px 15px;
+    :root {
+        --padding-page: var(--padding-page-xs);
     }
 
     h1 {

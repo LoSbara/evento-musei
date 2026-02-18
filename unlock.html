@@ -13,16 +13,12 @@
         <p id="pageTitle">Inserisci il codice per sbloccare questa sezione</p>
         <div class="hint-text" id="hintText"></div>
 
-        <div class="code-input-container">
-            <input type="text" class="code-input" id="digit1" placeholder="?" maxlength="1">
-            <input type="text" class="code-input" id="digit2" placeholder="?" maxlength="1">
-            <input type="text" class="code-input" id="digit3" placeholder="?" maxlength="1">
-        </div>
+        <div class="code-input-container"></div>
 
         <button onclick="unlockSection()">Verifica Codice</button>
         <div class="message" id="message"></div>
 
-        <a href="index.html" class="back-link">← Torna al diario</a>
+        <a href="index.html#view=" class="back-link" id="backLink">← Torna al diario</a>
     </div>
 
     <script>
@@ -36,6 +32,8 @@
             '16': '000',
             '17': '000',
             '18': '000',
+            '19': '000',
+            '20': '000',
             '23': 'FACE',
             '24': 'FACE'
         };
@@ -53,11 +51,30 @@
 
         var pageParams = new URLSearchParams(window.location.search);
         var pageNum = pageParams.get('page');
+        var returnView = pageParams.get('view') || '0';
 
-        var input1 = document.getElementById('digit1');
-        var input2 = document.getElementById('digit2');
-        var input3 = document.getElementById('digit3');
+        // Determina il numero di input necessari
+        var inputCount = 3; // default
+        if (pageNum && codeMap[pageNum]) {
+            inputCount = codeMap[pageNum].length;
+        }
 
+        // Genera gli input dinamicamente
+        var container = document.querySelector('.code-input-container');
+        var inputs = [];
+        
+        for (var i = 0; i < inputCount; i++) {
+            var input = document.createElement('input');
+            input.type = 'text';
+            input.className = 'code-input';
+            input.id = 'digit' + (i + 1);
+            input.placeholder = '?';
+            input.maxLength = '1';
+            container.appendChild(input);
+            inputs.push(input);
+        }
+
+        // Mostra l'indizio
         if (pageNum && codeMap[pageNum]) {
             var hint = hints[pageNum] || '';
             if (hint) {
@@ -65,24 +82,17 @@
             }
         }
 
-        input1.addEventListener('input', function() {
-            if (input1.value) {
-                input1.value = input1.value.toUpperCase();
-                input2.focus();
-            }
-        });
-
-        input2.addEventListener('input', function() {
-            if (input2.value) {
-                input2.value = input2.value.toUpperCase();
-                input3.focus();
-            }
-        });
-
-        input3.addEventListener('input', function() {
-            if (input3.value) {
-                input3.value = input3.value.toUpperCase();
-            }
+        // Aggiungi event listener a tutti gli input
+        inputs.forEach(function(input, index) {
+            input.addEventListener('input', function() {
+                if (input.value) {
+                    input.value = input.value.toUpperCase();
+                    // Muovi al prossimo input se non è l'ultimo
+                    if (index < inputs.length - 1) {
+                        inputs[index + 1].focus();
+                    }
+                }
+            });
         });
 
         function unlockSection() {
@@ -93,16 +103,23 @@
             }
 
             var correctCode = codeMap[pageNum];
-            var inputCode = (input1.value + input2.value + input3.value).toUpperCase();
+            var inputCode = '';
+            
+            // Raccogli i valori da tutti gli input
+            inputs.forEach(function(input) {
+                inputCode += input.value;
+            });
+            
+            inputCode = inputCode.toUpperCase();
             var messageEl = document.getElementById('message');
 
             if (inputCode !== correctCode) {
                 messageEl.textContent = '❌ Codice errato. Riprova!';
                 messageEl.className = 'message error';
-                input1.value = '';
-                input2.value = '';
-                input3.value = '';
-                input1.focus();
+                inputs.forEach(function(input) {
+                    input.value = '';
+                });
+                inputs[0].focus();
                 return;
             }
 
@@ -121,7 +138,7 @@
                 messageEl.className = 'message success';
 
                 setTimeout(function() {
-                    window.location.href = 'index.html';
+                    window.location.href = 'index.html#view=' + returnView;
                 }, 1500);
             }
         }
@@ -130,7 +147,11 @@
             if (e.key === 'Enter') unlockSection();
         });
 
-        input1.focus();
+        // Focus al primo input
+        inputs[0].focus();
+
+        // Imposta il link "Torna al diario" con il numero della vista corretta
+        document.getElementById('backLink').href = 'index.html#view=' + returnView;
     </script>
 </body>
 </html>
