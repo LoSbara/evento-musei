@@ -1,0 +1,188 @@
+@font-face {
+    font-family: 'Tox Typewriter';
+    src: url('../fonts/Tox Typewriter.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Tox Typewriter', monospace;
+    color: #e8dcc4;
+    padding: 20px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.unlock-container {
+    background: linear-gradient(135deg, #f5f1e8 0%, #e8dcc4 100%);
+    padding: 60px 50px;
+    border-radius: 0;
+    max-width: 500px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+    text-align: center;
+}
+
+.lock-icon {
+    font-size: 5em;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-family: 'Tox Typewriter', monospace;
+    font-size: 2.5em;
+    color: #2d1810;
+    margin-bottom: 20px;
+    letter-spacing: 0.15em;
+}
+
+p {
+    font-size: 1.35em;
+    color: #3d3d3d;
+    margin-bottom: 30px;
+    line-height: 1.8;
+    font-family: 'Tox Typewriter', monospace;
+    letter-spacing: 0.05em;
+}
+
+.hint-text {
+    background: #f0f0f0;
+    padding: 15px;
+    border-left: 3px solid #b18c14;
+    margin-bottom: 25px;
+    text-align: left;
+    font-size: 1.2em;
+    font-style: italic;
+    letter-spacing: 0.03em;
+    line-height: 1.7;
+}
+
+.code-input-container {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin: 30px 0;
+}
+
+.code-input {
+    width: 70px;
+    height: 70px;
+    font-size: 2.5em;
+    text-align: center;
+    border: 3px solid #8b4513;
+    border-radius: 0;
+    font-weight: bold;
+    font-family: 'Tox Typewriter', monospace;
+    background: white;
+    color: #2d1810;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.code-input:focus {
+    outline: none;
+    border-color: #d4af37;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+    transform: scale(1.1);
+}
+
+.code-input::placeholder {
+    color: #ccc;
+}
+
+button {
+    padding: 15px 50px;
+    background: linear-gradient(135deg, #d4af37 0%, #c9a227 100%);
+    color: #2d1810;
+    border: none;
+    border-radius: 0;
+    font-size: 1.1em;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: 'Tox Typewriter', monospace;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+    margin-top: 20px;
+    letter-spacing: 1.5px;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #e8c547 0%, #d4af37 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+}
+
+.message {
+    margin-top: 20px;
+    font-size: 1.4em;
+    min-height: 30px;
+    font-family: 'Tox Typewriter', monospace;
+    letter-spacing: 0.05em;
+}
+
+.error {
+    color: #bf1935;
+}
+
+.success {
+    color: #2d5016;
+}
+
+.back-link {
+    display: block;
+    margin-top: 30px;
+    color: #8b4513;
+    text-decoration: none;
+    font-style: italic;
+    transition: all 0.3s ease;
+    font-family: 'Tox Typewriter', monospace;
+}
+
+.back-link:hover {
+    color: #d4af37;
+}
+
+.decorator {
+    font-size: 2em;
+    color: #d4af37;
+    margin: 20px 0;
+}
+
+/* Media query per mobile */
+@media (max-width: 1024px) {
+    h1 {
+        font-size: 1.5em !important;
+    }
+    
+    p {
+        font-size: 1.1em !important;
+        line-height: 1.9;
+    }
+    
+    .hint-text {
+        font-size: 0.95em !important;
+    }
+    
+    button {
+        font-size: 0.95em !important;
+        padding: 18px 50px;
+    }
+    
+    .message {
+        font-size: 0.95em !important;
+    }
+    
+    .back-link {
+        font-size: 0.9em !important;
+    }
+}
