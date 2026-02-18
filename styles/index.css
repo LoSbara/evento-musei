@@ -122,7 +122,7 @@ body {
     display: flex;
     overflow: hidden;
     transition: transform 1s ease;
-    width: 600vw;
+    width: 1300vw;
     flex-wrap: nowrap;
     position: relative;
 }
@@ -605,7 +605,7 @@ button:disabled {
     }
 
     .pages-wrapper {
-        width: 2400vw !important;
+        width: 2500vw !important;
     }
 
     .page {
