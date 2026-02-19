@@ -7,6 +7,22 @@
     <link rel="stylesheet" href="styles/index.css">
 </head>
 <body>
+    <!-- Popup Modale Dichiarazione -->
+    <div class="modal-overlay" id="welcomeModal">
+        <div class="modal-content">
+            <img src="styles/logo-Narratori-tondo-.png" alt="Logo Narratori di Mondi" class="modal-logo">
+            <h2 class="modal-title">Avviso degli autori</h2>
+            <div class="modal-text">
+                <p>Il gioco a cui parteciperete è frutto di un'opera di immaginazione che parte da fatti reali e che presenta informazioni fittizie come fossero fatti veramente accaduti.</p>
+                <p>Il nostro intendimento è quello di rendere verosimile l'opera di finzione a cui siete invitati a partecipare.</p>
+                <p>Al termine dell'indagine a cui parteciperete troverete anche chiarite quali parti della storia a voi presentata sono frutto della nostra immaginazione.</p>
+                <p>Speriamo quindi che ci perdonerete le molte inesattezze storiche che presenteremo e che vorrete sospendere eventuali critiche in favore del divertimento che potrete sperimentare.</p>
+                <p class="modal-signature">Buona caccia.</p>
+            </div>
+            <button class="modal-button" onclick="closeWelcomeModal()">Inizia l'avventura</button>
+        </div>
+    </div>
+
     <div class="book-container">
         <div class="pages-wrapper" id="pagesWrapper">
             <!-- PAGINA 1: COPERTINA -->
@@ -348,6 +364,78 @@
                     <div class="page-number">24</div>
                 </div>
             </div>
+
+            <!-- PAGINA 25: EPILOGO - BLOCCATA FINO AL COMPLETAMENTO -->
+            <div class="page locked-page" id="page-25">
+                <div class="locked-content">
+                    <div class="lock-icon">🎉</div>
+                    <h2>Epilogo</h2>
+                    <p>Hai quasi concluso il tuo viaggio attraverso il diario di Philippe De Rouge.</p>
+                    <p>Per accedere all'epilogo finale, devi prima completare l'intera avventura sbloccando tutte le pagine del diario.</p>
+                    <p class="mt-lg" style="font-size: 0.9em; color: #666;">Questa sezione si sbloccherà automaticamente quando avrai scoperto tutti i segreti.</p>
+                </div>
+                <div class="unlocked-content" style="display: none;">
+                    <div class="feedback-container">
+                        <h2>Grazie per aver viaggiato con noi</h2>
+                        <p>Hai completato l'avventura nel mondo di Philippe De Rouge, svelando i segreti nascosti nei musei di Pistoia.</p>
+                        <p>La tua opinione è preziosa per noi. Ti chiediamo qualche minuto per condividere il tuo feedback su questa esperienza.</p>
+                        
+                        <form name="valutazione-avventura" method="POST" data-netlify="true" class="feedback-form" onsubmit="return handleFormSubmit(event)">
+                            <input type="hidden" name="form-name" value="valutazione-avventura">
+                            
+                            <div class="form-group">
+                                <label>Ti è piaciuta l'avventura?</label>
+                                <div class="radio-group">
+                                    <label class="radio-label">
+                                        <input type="radio" name="piaciuta" value="Sì" required>
+                                        <span>Sì</span>
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="piaciuta" value="No" required>
+                                        <span>No</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Che valutazione dai all'avventura?</label>
+                                <div class="rating-group">
+                                    <input type="radio" name="valutazione" value="1" id="star1" required>
+                                    <label for="star1" class="star-label">1</label>
+                                    
+                                    <input type="radio" name="valutazione" value="2" id="star2" required>
+                                    <label for="star2" class="star-label">2</label>
+                                    
+                                    <input type="radio" name="valutazione" value="3" id="star3" required>
+                                    <label for="star3" class="star-label">3</label>
+                                    
+                                    <input type="radio" name="valutazione" value="4" id="star4" required>
+                                    <label for="star4" class="star-label">4</label>
+                                    
+                                    <input type="radio" name="valutazione" value="5" id="star5" required>
+                                    <label for="star5" class="star-label">5</label>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="commenti">Commenti o suggerimenti (opzionale):</label>
+                                <textarea name="commenti" id="commenti" rows="4" placeholder="Condividi la tua esperienza..."></textarea>
+                            </div>
+                            
+                            <button type="submit" class="submit-button">Invia Valutazione</button>
+                        </form>
+                    </div>
+                    
+                    <div class="thank-you-message" style="display: none;">
+                        <h2>Grazie!</h2>
+                        <p>La tua valutazione è stata inviata con successo.</p>
+                        <p class="mt-lg">Il mistero di Philippe De Rouge resta ora nelle tue memorie, come un'eco delle strade di Pistoia che hai percorso insieme a lui.</p>
+                        <p class="subtitle text-center mt-lg" style="font-style: italic;">Una produzione Narratori di Mondi</p>
+                    </div>
+                    
+                    <div class="page-number">25</div>
+                </div>
+            </div>
         </div>
 
         <div class="nav-arrow nav-left" onclick="previousPage()" id="prevBtn">❮</div>
@@ -368,7 +456,7 @@
         }
 
         function checkAndApplyUnlocks() {
-            const pagesToCheck = [5, 6, 7, 8, 9, 10, 16, 17, 18, 19, 20, 23, 24];
+            const pagesToCheck = [5, 6, 7, 8, 9, 10, 16, 17, 18, 19, 20, 23, 24, 25];
             
             for (let i = 0; i < pagesToCheck.length; i++) {
                 const pageNum = pagesToCheck[i];
@@ -403,6 +491,79 @@
                     }
                 }
             }
+            
+            // Controlla se tutte le pagine sono sbloccate per sbloccare automaticamente la pagina finale
+            checkAndUnlockFinalPage();
+        }
+
+        function checkAndUnlockFinalPage() {
+            // Pagine che devono essere sbloccate (esclusa la 25 che è il finale)
+            const requiredPages = [5, 6, 7, 8, 9, 10, 16, 17, 18, 19, 20, 23, 24];
+            let allUnlocked = true;
+            
+            for (let i = 0; i < requiredPages.length; i++) {
+                const key = 'page' + requiredPages[i] + '_unlocked';
+                const storedData = localStorage.getItem(key);
+                
+                if (!storedData) {
+                    allUnlocked = false;
+                    break;
+                }
+                
+                try {
+                    const data = JSON.parse(storedData);
+                    if (!data.unlocked) {
+                        allUnlocked = false;
+                        break;
+                    }
+                } catch (e) {
+                    allUnlocked = false;
+                    break;
+                }
+            }
+            
+            // Se tutte le pagine sono sbloccate, sblocca automaticamente la pagina 25
+            if (allUnlocked) {
+                const key = 'page25_unlocked';
+                const storedData = localStorage.getItem(key);
+                
+                if (!storedData) {
+                    // Sblocca la pagina 25
+                    const unlockData = {
+                        unlocked: true,
+                        timestamp: Date.now()
+                    };
+                    localStorage.setItem(key, JSON.stringify(unlockData));
+                }
+            }
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            
+            // Invia il form usando fetch
+            const form = event.target;
+            const formData = new FormData(form);
+            
+            fetch('/', {
+                method: 'POST',
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: new URLSearchParams(formData).toString()
+            })
+            .then(() => {
+                // Nascondi il form e mostra il messaggio di ringraziamento
+                const feedbackContainer = document.querySelector('.feedback-container');
+                const thankYouMessage = document.querySelector('.thank-you-message');
+                
+                if (feedbackContainer) feedbackContainer.style.display = 'none';
+                if (thankYouMessage) thankYouMessage.style.display = 'block';
+            })
+            .catch((error) => {
+                alert('Errore nell\'invio della valutazione. Riprova più tardi.');
+                console.error('Error:', error);
+            });
+            
+            return false;
         }
 
         function showPage(viewIdx) {
@@ -476,6 +637,21 @@
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowLeft') previousPage();
             if (e.key === 'ArrowRight') nextPage();
+        });
+
+        // Gestione Modal di Benvenuto
+        function closeWelcomeModal() {
+            const modal = document.getElementById('welcomeModal');
+            modal.style.display = 'none';
+            localStorage.setItem('welcomeModalSeen', 'true');
+        }
+
+        // Mostra il modal solo la prima volta
+        window.addEventListener('load', function() {
+            const hasSeenModal = localStorage.getItem('welcomeModalSeen');
+            if (!hasSeenModal) {
+                document.getElementById('welcomeModal').style.display = 'flex';
+            }
         });
     </script>
 </body>
