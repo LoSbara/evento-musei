@@ -115,6 +115,7 @@ body {
     flex-direction: column;
     overflow: hidden;
     background: var(--color-bg-dark);
+    position: relative;
 }
 
 .pages-wrapper {
@@ -128,16 +129,7 @@ body {
 }
 
 .pages-wrapper::before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 0;
-    width: 3px;
-    height: 100%;
-    background: linear-gradient(to bottom, transparent 0%, var(--color-border) 10%, var(--color-border) 90%, transparent 100%);
-    z-index: 50;
-    transform: translateX(-50%);
-    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.4);
+    content: none;
 }
 
 /* ============================================
