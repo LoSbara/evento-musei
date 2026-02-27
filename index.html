@@ -16,7 +16,7 @@
                 <p>Il gioco a cui parteciperete è frutto di un'opera di immaginazione che parte da fatti reali e che presenta informazioni fittizie come fossero fatti veramente accaduti.</p>
                 <p>Il nostro intendimento è quello di rendere verosimile l'opera di finzione a cui siete invitati a partecipare.</p>
                 <p>Al termine dell'indagine a cui parteciperete troverete anche chiarite quali parti della storia a voi presentata sono frutto della nostra immaginazione.</p>
-                <p>Speriamo quindi che ci perdonerete le molte inesattezze storiche che presenteremo e che vorrete sospendere eventuali critiche in favore del divertimento che potrete sperimentare.</p>
+                <p>Le molte inesattezze storiche che presenteremo sono quindi legate all'opera di finzione, ma speriamo che in tale cornice potrete comunque apprezzare le vere bellezze delle opere museali che vi sono inscritte e speriamo anche che apprezzerete il divertimento e che la finzione vi farà sperimentare.</p>
                 <p class="modal-signature">Buona caccia.</p>
             </div>
             <button class="modal-button" onclick="closeWelcomeModal()">Inizia l'avventura</button>
@@ -145,6 +145,7 @@
                     <p>Uno dei due mi ha anche mostrato un distintivo da poliziotto, chiarendomi che non mi conveniva fare lo stronzo… perché sarebbe venuto lui a redigere il verbale, se avessi voluto sporgere denuncia.</p>
                     <p>Quando se ne sono andati sono salito in auto e sono andato di volata a casa, dopo aver controllato per messaggio che Amèlie fosse fuori. Mi sono chiuso la porta alle spalle e ho guardato i documenti, sul tavolo del cucinino, dicendomi che dovevo nasconderli… per cui l'ho fatto subito, anche se non al sicuro come vorrei. Stanotte non riuscirò a dormire, lo so.</p>
                     <p>Sono nei guai. In grossi guai.</p>
+                    <p>Se De Rossi è disposto ad arrivare a questo punto per quelle carte, la cosa deve avere ben più ricadute di quante immaginavo; eppure non intendo lasciarglieli.</p>
                     <div class="page-number">9</div>
                 </div>
             </div>
@@ -156,13 +157,14 @@
                     <h2>Sezione Bloccata</h2>
                 </div>
                 <div class="unlocked-content" style="display: none;">
-                    <p>Se De Rossi è disposto ad arrivare a questo punto per quelle carte, la cosa deve avere ben più ricadute di quante immaginavo; eppure non intendo lasciarglieli. Io non sono disposto a sacrificare la verità… non riuscirei più a guardarmi allo specchio la mattina, altrimenti.</p>
+                    <p>Io non sono disposto a sacrificare la verità… non riuscirei più a guardarmi allo specchio la mattina, altrimenti.</p>
                     <p>Ma sono certo di non poter neppure tornare a far finta di nulla.</p>
                     <p>Quando se ne sono andati sono salito in auto e sono andato di volata a casa. Mi sono chiuso la porta alle spalle e ho guardato i documenti, sul tavolo del cucinino, dicendomi che dovevo nasconderli… per cui l'ho fatto subito, anche se non al sicuro come vorrei. Stanotte non riuscirò a dormire, lo so.</p>
                     <p>Sono nei guai. In grossi guai.</p>
                     <p>Se De Rossi è disposto ad arrivare a questo punto per quelle carte, la cosa deve avere ben più ricadute di quante immaginavo; eppure non intendo lasciarglieli. Io non sono disposto a sacrificare la verità… non riuscirei più a guardarmi allo specchio la mattina, altrimenti.</p>
                     <p>Ma sono certo di non poter neppure tornare a far finta di nulla.</p>
                     <div class="handwritten-note text-center">Tra le lettere della vostra mappa ve n'è una in cui ho lasciato l'ultimo dei frammenti da scoprire; si tratta, invero, dell'anno di una certa data.</div>
+                    <div class="agatha-signature">Agatha Christie</div>
                     <div class="page-number">10</div>
                 </div>
             </div>
@@ -289,6 +291,7 @@
                     <h2>Giovedì 11 Dicembre.</h2>
                     <p>Ho nascosto il diario, gli appunti, la copia dei documenti e dei miei studi… Spero non serva, ma in caso, sii la mia ultima speranza.</p>
                     <div class="handwritten-note text-center">Quel luogo è la casa di molti solidi chiusi, che se aperti rivelano interi mondi.</div>
+                    <div class="agatha-signature">Agatha Christie</div>
                     <div class="page-number">20</div>
                 </div>
             </div>
@@ -361,14 +364,62 @@
                     <p>Un abbraccio fraterno,</p>
                     <div class="signature text-right mt-sm">Philippe De Rouge</div>
                     <div class="handwritten-note text-center">A voi non serve forzare le sue armate porte, ma solo rintracciare l'anno romano, bianco su nero.</div>
+                    <div class="agatha-signature">Agatha Christie</div>
                     <div class="page-number">24</div>
                 </div>
             </div>
 
-            <!-- PAGINA 25: EPILOGO - BLOCCATA FINO AL COMPLETAMENTO -->
-            <div class="page locked-page" id="page-25">
+            <!-- PAGINA 25: DOCUMENTO STORICO - BLOCCATO CON 1023 -->
+            <div class="page locked-page" id="page-25" style="padding: 0; margin: 0;">
                 <div class="locked-content">
-                    <div class="lock-icon">🎉</div>
+                    <div class="lock-icon">🔐</div>
+                    <h2>Documento Storico</h2>
+                    <p>Atto notarile di rinuncia al nome...</p>
+                    <a href="#" class="qr-link inline-block mt-lg" onclick="openUnlock(event, '25')">Inserisci il Codice</a>
+                </div>
+                <div class="unlocked-content" style="display: none; padding: 0; margin: 0; width: 100%; height: 100%;">
+                    <img src="document-1-1.jpg" style="width: 100%; height: 100%; object-fit: contain; display: block;" alt="Documento Storico">
+                </div>
+            </div>
+
+            <!-- PAGINA 26: CONFESSIONE DI GRANDONIO - BLOCCATO CON 1023 -->
+            <div class="page locked-page" id="page-26" style="padding: 0; margin: 0;">
+                <div class="locked-content">
+                    <div class="lock-icon">🔐</div>
+                    <h2>Lettera Confessionale</h2>
+                </div>
+                <div class="unlocked-content" style="display: none; padding: 0; margin: 0; width: 100%; height: 100%;">
+                    <img src="document-2-1.jpg" style="width: 100%; height: 100%; object-fit: contain; display: block;" alt="Lettera Confessionale">
+                </div>
+            </div>
+
+            <!-- PAGINA 27: DICHIARAZIONE DI AGATHA - BLOCCATO CON 1023 -->
+            <div class="page locked-page" id="page-27">
+                <div class="locked-content">
+                    <div class="lock-icon">🔐</div>
+                    <h2>Dichiarazione Finale</h2>
+                    <p>La conclusione della storia di Philippe De Rouge...</p>
+                    <a href="#" class="qr-link inline-block mt-lg" onclick="openUnlock(event, '27')">Inserisci il Codice</a>
+                </div>
+                <div class="unlocked-content" style="display: none;">
+                    <div class="handwritten-note" style="border-top: none; margin-top: 0; padding-top: 0; text-align: justify; font-size: 1.4em; line-height: 1.6;">
+                        Se siete giunti sino a qui, ora sapete cosa è accaduto a Philippe e avete sottomano il suo diario, per come mi fu inviato e i documenti che rinvenni, come avete fatto voi, tra i musei di questa città.
+                        <br>
+                        Non so se la diffusione di questa verità sarà sufficiente a riportare Philippe De Rouge tra le braccia di sua moglie Amèlie, ma mi auguro che, oramai che la verità è conosciuta e che non potrà più essere nascosta, chi di dovere paghi e che il mio amico sia liberato.
+                        <br>
+                        Avrei potuto divulgare la vicenda in altro modo, ma ritengo che dopo averla ricercata, anche per voi essa sia divenuta preziosa e che mi aiuterete volentieri affinché il torto sia riparato.
+                        <br>
+                        Con questo vi saluto, amici investigatori.
+                        <br><br>
+                        <div style="text-align: right; margin-top: 0.5rem; font-size: 1.3em;">Agatha Christie.</div>
+                    </div>
+                    <div class="page-number">27</div>
+                </div>
+            </div>
+
+            <!-- PAGINA 28: EPILOGO - FORM DI VALUTAZIONE -->
+            <div class="page locked-page" id="page-28">
+                <div class="locked-content">
                     <h2>Epilogo</h2>
                     <p>Hai quasi concluso il tuo viaggio attraverso il diario di Philippe De Rouge.</p>
                     <p>Per accedere all'epilogo finale, devi prima completare l'intera avventura sbloccando tutte le pagine del diario.</p>
@@ -418,6 +469,27 @@
                             </div>
                             
                             <div class="form-group">
+                                <label>Quanto è stato facile trovare i codici nei musei?</label>
+                                <div class="rating-group">
+                                    <input type="radio" name="difficolta-codici" value="1" id="difficolta1" required>
+                                    <label for="difficolta1" class="star-label">1</label>
+                                    
+                                    <input type="radio" name="difficolta-codici" value="2" id="difficolta2" required>
+                                    <label for="difficolta2" class="star-label">2</label>
+                                    
+                                    <input type="radio" name="difficolta-codici" value="3" id="difficolta3" required>
+                                    <label for="difficolta3" class="star-label">3</label>
+                                    
+                                    <input type="radio" name="difficolta-codici" value="4" id="difficolta4" required>
+                                    <label for="difficolta4" class="star-label">4</label>
+                                    
+                                    <input type="radio" name="difficolta-codici" value="5" id="difficolta5" required>
+                                    <label for="difficolta5" class="star-label">5</label>
+                                </div>
+                                <p style="font-size: 0.85em; color: #666; margin-top: 0.5rem; text-align: center;">1 = Molto difficile | 5 = Molto facile</p>
+                            </div>
+                            
+                            <div class="form-group">
                                 <label for="commenti">Commenti o suggerimenti (opzionale):</label>
                                 <textarea name="commenti" id="commenti" rows="4" placeholder="Condividi la tua esperienza..."></textarea>
                             </div>
@@ -430,10 +502,12 @@
                         <h2>Grazie!</h2>
                         <p>La tua valutazione è stata inviata con successo.</p>
                         <p class="mt-lg">Il mistero di Philippe De Rouge resta ora nelle tue memorie, come un'eco delle strade di Pistoia che hai percorso insieme a lui.</p>
-                        <p class="subtitle text-center mt-lg" style="font-style: italic;">Una produzione Narratori di Mondi</p>
+                        <p class="mt-lg">Grazie per aver partecipato a questa avventura e per il tempo che hai dedicato al nostro progetto.</p>
+                        <p class="subtitle text-center mt-lg" style="font-style: italic;">Prodotto e realizzato in collaborazione con i musei dai Narratori di Mondi</p>
+                        <img src="styles/logo-Narratori-tondo-.png" alt="Logo Narratori di Mondi" style="width: 80px; height: 80px; margin: 2rem auto 0; display: block; border-radius: 50%;">
                     </div>
                     
-                    <div class="page-number">25</div>
+                    <div class="page-number">28</div>
                 </div>
             </div>
         </div>
@@ -444,7 +518,6 @@
 
     <script>
         let curPage = 0;
-        const totalPages = document.querySelectorAll('.page').length;
         
         function getPagesPerView() {
             return window.innerWidth > 768 ? 2 : 1;
@@ -452,11 +525,12 @@
         
         function getTotalViews() {
             const pagesPerView = getPagesPerView();
+            const totalPages = document.querySelectorAll('.page').length;  // Ricalcolo dinamico
             return Math.ceil(totalPages / pagesPerView);
         }
 
         function checkAndApplyUnlocks() {
-            const pagesToCheck = [5, 6, 7, 8, 9, 10, 16, 17, 18, 19, 20, 23, 24, 25];
+            const pagesToCheck = [5, 6, 7, 8, 9, 10, 16, 17, 18, 19, 20, 23, 24, 25, 26, 27, 28];
             
             for (let i = 0; i < pagesToCheck.length; i++) {
                 const pageNum = pagesToCheck[i];
@@ -497,8 +571,8 @@
         }
 
         function checkAndUnlockFinalPage() {
-            // Pagine che devono essere sbloccate (esclusa la 25 che è il finale)
-            const requiredPages = [5, 6, 7, 8, 9, 10, 16, 17, 18, 19, 20, 23, 24];
+            // Pagine che devono essere sbloccate (esclusa la 28 che è il finale)
+            const requiredPages = [5, 6, 7, 8, 9, 10, 16, 17, 18, 19, 20, 23, 24, 25, 26, 27];
             let allUnlocked = true;
             
             for (let i = 0; i < requiredPages.length; i++) {
@@ -522,9 +596,9 @@
                 }
             }
             
-            // Se tutte le pagine sono sbloccate, sblocca automaticamente la pagina 25
+            // Se tutte le pagine sono sbloccate, sblocca automaticamente la pagina 28
             if (allUnlocked) {
-                const key = 'page25_unlocked';
+                const key = 'page28_unlocked';
                 const storedData = localStorage.getItem(key);
                 
                 if (!storedData) {
