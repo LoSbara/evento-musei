@@ -836,14 +836,14 @@ button:disabled {
     }
 
     .page {
-        padding: 10px 11px 30px 11px;
+        padding: 10px 11px 60px 11px;
         overflow-y: auto;
         overflow-x: hidden;
         position: relative;
     }
 
     .page.page-1 {
-        padding: 15px 11px 25px 11px;
+        padding: 12px 11px 50px 11px;
         justify-content: space-between;
     }
 
@@ -857,25 +857,25 @@ button:disabled {
     }
 
     .page h1 {
-        font-size: 1.4em !important;
-        margin-bottom: 6px !important;
+        font-size: 1.35em !important;
+        margin-bottom: 4px !important;
     }
 
     .page h2 {
         font-size: 0.96em !important;
-        margin-top: 7px !important;
-        margin-bottom: 5px !important;
+        margin-top: 5px !important;
+        margin-bottom: 4px !important;
     }
 
     .page p {
-        font-size: 0.85em !important;
-        line-height: 1.45 !important;
-        margin-bottom: 5px !important;
+        font-size: 0.82em !important;
+        line-height: 1.4 !important;
+        margin-bottom: 3px !important;
     }
 
     .page.page-1 .subtitle {
-        font-size: 0.95em !important;
-        margin-bottom: 3px !important;
+        font-size: 0.88em !important;
+        margin-bottom: 2px !important;
     }
 
     .page .handwritten-note {
@@ -928,20 +928,20 @@ button:disabled {
     }
 
     .solutions-box {
-        width: 90% !important;
-        padding: 13px 14px !important;
-        margin-bottom: 10px !important;
+        width: 92% !important;
+        padding: 14px 16px !important;
+        margin-bottom: 8px !important;
     }
 
     .solutions-label {
-        font-size: 0.82em !important;
-        margin-bottom: 9px !important;
+        font-size: 0.84em !important;
+        margin-bottom: 10px !important;
         font-weight: 700 !important;
     }
 
     .solutions-link {
-        padding: 9px 20px !important;
-        font-size: 0.75em !important;
+        padding: 9px 22px !important;
+        font-size: 0.78em !important;
         font-weight: 800 !important;
     }
 }
