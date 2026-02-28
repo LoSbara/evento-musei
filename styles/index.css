@@ -567,6 +567,56 @@ button:disabled {
 .height-full { height: 100% !important; }
 
 /* ============================================
+   BOX SOLUZIONI
+   ============================================ */
+.solutions-box {
+    margin-top: auto;
+    padding: 24px 30px;
+    background: rgba(212, 175, 55, 0.28);
+    border: 3px solid #8b7355;
+    border-radius: 8px;
+    text-align: center;
+    width: 85%;
+    max-width: 420px;
+    box-shadow: 0 8px 24px rgba(139, 115, 85, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.solutions-label {
+    color: #2d1810;
+    font-size: 1.02em;
+    margin-bottom: 16px;
+    letter-spacing: 0.05em;
+    font-family: var(--font-typewriter);
+    font-weight: 700;
+}
+
+.solutions-link {
+    display: inline-block;
+    padding: 13px 40px;
+    background: linear-gradient(135deg, #d4af37 0%, #c9a227 100%);
+    color: #2d1810;
+    text-decoration: none;
+    font-weight: 900;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    font-family: var(--font-typewriter);
+    letter-spacing: 1.2px;
+    border: 2px solid #8b7355;
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.45);
+}
+
+.solutions-link:hover {
+    background: linear-gradient(135deg, #e8c547 0%, #d4af37 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.6);
+}
+
+.solutions-link:active {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(212, 175, 55, 0.35);
+}
+
+/* ============================================
    MEDIA QUERIES
    ============================================ */
 @media (max-width: 1024px) {
@@ -615,6 +665,22 @@ button:disabled {
 
     .locked-page p {
         font-size: 0.85em !important;
+    }
+
+    .solutions-box {
+        width: 90% !important;
+        padding: 20px 22px !important;
+    }
+
+    .solutions-label {
+        font-size: 0.96em !important;
+        font-weight: 700 !important;
+    }
+
+    .solutions-link {
+        padding: 11px 30px !important;
+        font-size: 0.96em !important;
+        font-weight: 800 !important;
     }
 }
 
@@ -727,6 +793,37 @@ button:disabled {
         font-size: 0.95em !important;
         line-height: 1.55 !important;
     }
+
+    .solutions-box {
+        width: 85% !important;
+        padding: 20px 24px !important;
+    }
+
+    .solutions-label {
+        font-size: 0.98em !important;
+        margin-bottom: 13px !important;
+        font-weight: 700 !important;
+    }
+
+    .solutions-link {
+        padding: 12px 32px !important;
+        font-size: 0.93em !important;
+        font-weight: 800 !important;
+    }
+
+    .solutions-box {
+        width: 90% !important;
+        padding: 16px 18px !important;
+    }
+
+    .solutions-label {
+        font-size: 0.92em !important;
+    }
+
+    .solutions-link {
+        padding: 10px 25px !important;
+        font-size: 0.95em !important;
+    }
 }
 
 @media (max-width: 480px) {
@@ -818,6 +915,24 @@ button:disabled {
     .locked-page p {
         font-size: 0.85em !important;
         line-height: 1.45 !important;
+    }
+
+    .solutions-box {
+        width: 90% !important;
+        padding: 16px 18px !important;
+        margin-bottom: 12px !important;
+    }
+
+    .solutions-label {
+        font-size: 0.88em !important;
+        margin-bottom: 11px !important;
+        font-weight: 700 !important;
+    }
+
+    .solutions-link {
+        padding: 10px 24px !important;
+        font-size: 0.82em !important;
+        font-weight: 800 !important;
     }
 }
 
