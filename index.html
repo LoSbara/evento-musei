@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Diario di Philippe De Rouge</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles/index.css">
 </head>
 <body>
@@ -510,6 +511,89 @@
                     <div class="page-number">28</div>
                 </div>
             </div>
+
+            <!-- PAGINA 29: ULTIMA NOTA DEGLI AUTORI -->
+            <div class="page locked-page" id="page-29">
+                <div class="locked-content">
+                    <div class="lock-icon">🔐</div>
+                    <h2>Ultima Nota degli Autori</h2>
+                    <p>Elenco delle nostre menzogne...</p>
+                </div>
+                <div class="unlocked-content" style="display: none;">
+                    <div class="authors-note">
+                        <h2 style="text-align: center; margin-bottom: 1.5rem;">ULTIMA NOTA DEGLI AUTORI</h2>
+                        <h3 style="text-align: center; margin-bottom: 1rem; font-size: 1.1em; font-weight: normal;">ELENCO DELLE NOSTRE MENZOGNE</h3>
+                        
+                        <p style="text-align: justify; line-height: 1.8; margin-bottom: 1rem;">
+                            Abbiamo creato una storia di finzione a partire da fatti reali, che adesso elencheremo in un breve riassunto.
+                        </p>
+                        
+                        <p style="text-align: justify; line-height: 1.8; margin-bottom: 0.5rem;">
+                            <strong>È vero</strong> che Grandonio De' Rossi abbia partecipato ad una crociata minore e riportato schiavi da essa.
+                        </p>
+                        
+                        <p style="text-align: justify; line-height: 1.8; margin-bottom: 0.5rem;">
+                            <strong>È falso</strong> che la famiglia De' Rossi avesse origini francesi e che cambiò nome per cancellare vecchie colpe.
+                        </p>
+                        
+                        <p style="text-align: justify; line-height: 1.8; margin-bottom: 0.5rem;">
+                            <strong>È ancora più falso</strong> che i discendenti di tale famiglia (di cui invero non sappiamo nulla, neppure se esistano) siano persone malevole.
+                        </p>
+                        
+                        <p style="text-align: justify; line-height: 1.8; margin-bottom: 0.5rem;">
+                            <strong>È falso</strong> il personaggio di Philippe De Rouge, di sua moglie, che a giovani archeologi siano commissionati lavori a Pistoia.
+                        </p>
+                        
+                        <p style="text-align: justify; line-height: 1.8; margin-bottom: 0.5rem;">
+                            <strong>È falso</strong> che Agatha Christie viva oggi, purtroppo; morì nel 1976, ma a 50 anni di distanza, ci pare ancora un'ottima voce per una nuova storia.
+                        </p>
+                        
+                        <div class="page-number">29</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PAGINA 30: RICONOSCIMENTI E CONCLUSIONE -->
+            <div class="page locked-page" id="page-30">
+                <div class="locked-content">
+                    <div class="lock-icon">🔐</div>
+                    <h2>Conclusione</h2>
+                    <p>Il finale della storia...</p>
+                </div>
+                <div class="unlocked-content" style="display: none;">
+                    <div class="authors-note">
+                        <p style="text-align: justify; line-height: 1.8; margin-bottom: 1.5rem;">
+                            <strong>È vero, infine, quanto segue:</strong>
+                        </p>
+                        
+                        <p style="text-align: justify; line-height: 1.8; margin-bottom: 0.5rem;">
+                            Che siamo grati alla direzione dei musei di Pistoia che avete visitato in questa avventura, per l'opportunità che ci hanno dato ed in generale per il lavoro che svolgono.
+                        </p>
+                        
+                        <p style="text-align: justify; line-height: 1.8; margin-bottom: 0.5rem;">
+                            Che siamo grati a voi, per esservi prestati al nostro gioco.
+                        </p>
+                        
+                        <p style="text-align: justify; line-height: 1.8; margin-bottom: 2rem;">
+                            Che se siete arrivati a leggere anche questo, avete letto proprio tutto e siete stati proprio bravi… per cui fatevi un applauso, perché il nostro ve lo stiamo già facendo!
+                        </p>
+                        
+                        <p style="text-align: center; margin-bottom: 0.5rem;">Un saluto,</p>
+                        <p style="text-align: center; font-style: italic; margin-bottom: 2rem;">lo staff di Narratori di Mondi – Amici di Tommaso</p>
+                        
+                        <div style="text-align: center; margin: 2rem 0;">
+                            <img src="styles/logo-Narratori-tondo-.png" alt="Logo Narratori di Mondi" style="width: 100px; height: 100px; border-radius: 50%;">
+                        </div>
+                        
+                        <div style="text-align: center; margin-top: 2rem; display: flex; justify-content: center; gap: 1.5rem;">
+                            <a href="#" onclick="openSocialLink(event, 'facebook')" style="text-decoration: none; color: var(--color-text); font-size: 2em;" title="Visita il nostro Facebook"><i class="fab fa-facebook"></i></a>
+                            <a href="#" onclick="openSocialLink(event, 'instagram')" style="text-decoration: none; color: var(--color-text); font-size: 2em;" title="Visita il nostro Instagram"><i class="fab fa-instagram"></i></a>
+                        </div>
+                        
+                        <div class="page-number">30</div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="nav-arrow nav-left" onclick="previousPage()" id="prevBtn">❮</div>
@@ -525,12 +609,12 @@
         
         function getTotalViews() {
             const pagesPerView = getPagesPerView();
-            const totalPages = document.querySelectorAll('.page').length;  // Ricalcolo dinamico
+            const totalPages = document.querySelectorAll('.page').length;
             return Math.ceil(totalPages / pagesPerView);
         }
 
         function checkAndApplyUnlocks() {
-            const pagesToCheck = [5, 6, 7, 8, 9, 10, 16, 17, 18, 19, 20, 23, 24, 25, 26, 27, 28];
+            const pagesToCheck = [5, 6, 7, 8, 9, 10, 16, 17, 18, 19, 20, 23, 24, 25, 26, 27, 28, 29, 30];
             
             for (let i = 0; i < pagesToCheck.length; i++) {
                 const pageNum = pagesToCheck[i];
@@ -664,6 +748,35 @@
             showPage(curPage - 1);
         }
 
+        function openSocialLink(e, platform) {
+            e.preventDefault();
+            window.currentSocialPlatform = platform;
+            const platformName = platform === 'facebook' ? 'Facebook' : 'Instagram';
+            document.getElementById('socialModalTitle').textContent = `Narratori di Mondi - ${platformName}`;
+            const messages = {
+                facebook: 'Questo è un link che porta al profilo Facebook dei Narratori di Mondi, desideri continuare?',
+                instagram: 'Questo è un link che porta al profilo Instagram dei Narratori di Mondi, desideri continuare?'
+            };
+            document.getElementById('socialModalMessage').textContent = messages[platform];
+            document.getElementById('socialModal').style.display = 'flex';
+        }
+
+        function closeSocialModal() {
+            document.getElementById('socialModal').style.display = 'none';
+            window.currentSocialPlatform = null;
+        }
+
+        function confirmSocialLink() {
+            const links = {
+                facebook: 'https://www.facebook.com/narratoridimondiamiciditommaso/?locale=it_IT',
+                instagram: 'https://www.instagram.com/narratoridimondi/'
+            };
+            if (window.currentSocialPlatform) {
+                window.open(links[window.currentSocialPlatform], '_blank');
+                closeSocialModal();
+            }
+        }
+
         function openUnlock(e, pageNum) {
             e.preventDefault();
             window.location.href = `unlock.html?page=${pageNum}&view=${curPage}`;
@@ -728,5 +841,22 @@
             }
         });
     </script>
+
+    <!-- Modal Social Links -->
+    <div class="social-modal-overlay" id="socialModal">
+        <div class="social-modal">
+            <div class="social-modal-header">
+                <h2 id="socialModalTitle">Narratori di Mondi</h2>
+            </div>
+            <div class="social-modal-body">
+                <p id="socialModalMessage">Questo è un link che porta al profilo social dei Narratori di Mondi, desideri continuare?</p>
+            </div>
+            <div class="social-modal-actions">
+                <button class="social-modal-btn cancel" onclick="closeSocialModal()">No</button>
+                <button class="social-modal-btn confirm" onclick="confirmSocialLink()">Sì</button>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>

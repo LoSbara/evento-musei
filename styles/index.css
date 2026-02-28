@@ -123,7 +123,7 @@ body {
     display: flex;
     overflow: hidden;
     transition: transform 1s ease;
-    width: 1500vw;
+    width: 3100vw;
     flex-wrap: nowrap;
     position: relative;
 }
@@ -423,6 +423,25 @@ button:disabled {
     margin-top: 1rem;
 }
 
+.authors-note {
+    font-family: var(--font-typewriter);
+    font-size: 1em;
+}
+
+.authors-note h2 {
+    font-family: var(--font-typewriter);
+    font-size: 1.4em;
+    font-weight: bold;
+    color: var(--color-text);
+}
+
+.authors-note h3 {
+    font-family: var(--font-typewriter);
+    font-size: 1em;
+    font-weight: bold;
+    color: var(--color-text);
+}
+
 .controls {
     position: fixed;
     bottom: 40px;
@@ -609,7 +628,7 @@ button:disabled {
     }
 
     .pages-wrapper {
-        width: 3000vw !important;
+        width: 3100vw !important;
     }
 
     .page {
@@ -1190,4 +1209,160 @@ button:disabled {
         font-size: 0.9em;
         padding: 10px;
     }
+}
+/* ============================================
+   MODAL SOCIAL LINKS
+   ============================================ */
+.social-modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(45, 24, 16, 0.7);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.social-modal {
+    background: var(--gradient-page);
+    border: 3px solid var(--color-border);
+    border-radius: 0;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    max-width: 420px;
+    width: 90%;
+    overflow: hidden;
+    animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.social-modal-header {
+    background: linear-gradient(135deg, var(--color-border) 0%, var(--color-border-border) 100%);
+    padding: 25px 20px;
+    text-align: center;
+    border-bottom: 2px solid var(--color-border-light);
+    position: relative;
+}
+
+.social-modal-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.02) 2px,
+        rgba(0, 0, 0, 0.02) 4px
+    );
+    pointer-events: none;
+}
+
+.social-modal-header h2 {
+    margin: 0;
+    color: var(--color-light-text);
+    font-size: 1.6em;
+    font-family: var(--font-typewriter);
+    position: relative;
+    z-index: 1;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.social-modal-body {
+    padding: 30px 25px;
+    text-align: center;
+    background: var(--gradient-page);
+    position: relative;
+}
+
+.social-modal-body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent 0px,
+        transparent 2px,
+        rgba(0, 0, 0, 0.01) 2px,
+        rgba(0, 0, 0, 0.01) 4px
+    );
+    pointer-events: none;
+}
+
+.social-modal-body p {
+    margin: 0;
+    color: var(--color-text);
+    font-size: 0.95em;
+    font-family: var(--font-typewriter);
+    line-height: 1.6;
+    position: relative;
+    z-index: 1;
+}
+
+.social-modal-actions {
+    display: flex;
+    gap: 10px;
+    padding: 15px 25px 20px;
+    justify-content: center;
+    background: var(--gradient-page);
+    border-top: 1px solid var(--color-border-light);
+}
+
+.social-modal-btn {
+    padding: 8px 20px;
+    border: 2px solid var(--color-border);
+    border-radius: 0;
+    font-size: 0.85em;
+    font-family: var(--font-typewriter);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.social-modal-btn.cancel {
+    background-color: rgba(221, 208, 193, 0.6);
+    color: var(--color-text);
+    border-color: var(--color-border-border);
+}
+
+.social-modal-btn.cancel:hover {
+    background-color: var(--color-page-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-button);
+    border-color: var(--color-border);
+}
+
+.social-modal-btn.confirm {
+    background-color: var(--color-primary);
+    color: var(--color-dark);
+    border-color: var(--color-border);
+}
+
+.social-modal-btn.confirm:hover {
+    background-color: var(--color-primary-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-button-hover);
+    border-color: var(--color-border);
 }
